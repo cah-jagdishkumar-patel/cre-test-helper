@@ -1,0 +1,27 @@
+{
+  "name": "cre-test-helper",
+  "repo": "cahcommercial/cre-test-helper",
+  "groupId": "com.cardinalhealth.cre",
+  "mainBranch": "main",
+  "concourseTeam": "strikers",
+  "needsConnect": false,
+  "needsDB": false,
+  "needsConnectDb" : false,
+  "dbType" : "",
+  "hasFlyway": false,
+  "pcfOrganization": "strikers",
+  "type": "java",
+  "gradleBuild": true,
+  "gradleIntegrationTests": true,
+  "deployable": true,
+  "deployToEnvs" : ["stage"],
+  "sureFireReports": false,
+  "makeDocumentation": false,
+  "veracodeScanPRs": false,
+  "cf": {
+    "stage": {
+      "instances": 1,
+      "memory": "4g"
+    }
+  }
+}

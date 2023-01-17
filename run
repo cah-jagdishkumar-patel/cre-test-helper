@@ -1,0 +1,18 @@
+#export VAULT_ADDR=https://vault.dev.cahcommtech.com
+#vault login -method=ldap username=jagdishkumar.patel
+#vault write concourse/connect-plus/deploy-keys/cre-test-helper value=@/Users/jagdishkumar.patel/.ssh/id_ed25519
+#vault write concourse/connect-plus/deploy-keys/connect-sidecar-tools value=@/Users/jagdishkumar.patel/.ssh/id_ed25519
+#node ../outcomes-pipeline-tools/build_pipeline.js cre-test-helper
+#cd /Users/jagdishkumar.patel/dev/projects/spring/outcomes-pipeline-tools
+#./gradlew run --args="cre-test-helper
+#cp pipeline.yml ../cre-test-helper/deploy/
+cd /Users/jagdishkumar.patel/dev/projects/spring/cre-test-helper
+fly --target connect-plus login --team-name connect-plus --concourse-url  https://concourse6.dev.cahcommtech.com
+fly -t connect-plus destroy-pipeline -p cre-test-helper
+fly -t connect-plus set-pipeline -c deploy/pipeline.yml -p cre-test-helper
+fly -t connect-plus unpause-pipeline -p cre-test-helper
+fly -t connect-plus expose-pipeline -p cre-test-helper
+./gradlew build -x testClasses
+#cf login -a https://api.system.np1.fuseapps.io
+#cf push -f deploy/manifest-stage.yml -p build/libs/cre-test-helper-0.0.1-SNAPSHOT.jar
+

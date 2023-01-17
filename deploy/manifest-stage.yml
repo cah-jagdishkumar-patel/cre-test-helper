@@ -1,0 +1,14 @@
+applications:
+  - name: cre-test-helper
+    health-check-type: http
+    health-check-http-endpoint: /actuator/health
+    health-check-invocation-timeout: 5
+    health-check-timeout: 120
+    buildpacks:
+      - https://github.com/cloudfoundry/java-buildpack.git
+    routes:
+      - route: cre-test-helper-stage.apps.np1.fuseapps.io
+    env:
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+}}'
+      ENVIRONMENT: stage
+      LOGGING_LEVEL_ROOT: INFO
