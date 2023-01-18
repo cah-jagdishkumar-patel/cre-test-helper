@@ -36,7 +36,7 @@ public class TestHelperController {
     public Map<String,Object> fakePriorServiceData(final String patientId) {
         String data = "{}";
         try {
-            Resource resource = new ClassPathResource(String.format("%s_FakePriorServiceData.json", patientId));
+            Resource resource = new ClassPathResource(String.format("static/%s_FakePriorServiceData.json", patientId));
             data = Files.readString(Path.of(resource.getURL().getPath()));
         } catch (IOException e) {
             final String errorMessage = String.format("error reading fake prior service data for %s", patientId);
