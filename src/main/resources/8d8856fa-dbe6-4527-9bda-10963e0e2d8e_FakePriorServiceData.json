@@ -1,0 +1,22 @@
+{
+  "priorServiceList": [
+    {
+      "serviceId": "2274",
+      "serviceDate": "2022-01-01T20:20:39+00:00",
+      "resultTypeId": "13",
+      "resultDesc": "Prescriber refused recommendation"
+    },
+    {
+      "serviceId": "2274",
+      "serviceDate": "2021-01-01T20:20:39+00:00",
+      "resultTypeId": "16",
+      "resultDesc": "Unable to reach prescriber after 3 attempts"
+    },
+    {
+      "serviceId": "2274",
+      "serviceDate": "2021-02-01T20:20:39+00:00",
+      "resultTypeId": "16",
+      "resultDesc": "Unable to reach prescriber after 3 attempts"
+    }
+  ]
+}
