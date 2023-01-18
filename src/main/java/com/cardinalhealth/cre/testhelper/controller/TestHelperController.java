@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,7 +32,7 @@ public class TestHelperController {
         LOGGER.info("PR message sent to queue: {}", prInputQueueName);
     }
 
-    @GetMapping("/fakePriorServiceData")
+    @PostMapping("/fakePriorServiceData")
     public Map<String,Object> fakePriorServiceData(final String patientId) {
         String data = "{}";
         try {
@@ -46,7 +45,7 @@ public class TestHelperController {
         return new JSONObject(data).toMap();
     }
 
-    @GetMapping("/fakeServiceData")
+    @PostMapping("/fakeServiceData")
     public String fakeServiceData(final String patientId, final String valueList) {
         return "0.5";
     }
