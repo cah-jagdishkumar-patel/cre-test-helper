@@ -1,5 +1,6 @@
 package com.cardinalhealth.cre.testhelper.controller;
 
+import com.cardinalhealth.cre.testhelper.sqs.sender.PRMessageSender;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,16 +21,15 @@ import java.util.Map;
 @RestController
 public class TestHelperController {
     private static final Logger LOGGER = LoggerFactory.getLogger(TestHelperController.class);
-    @Value("${cloud.aws.queue.pr.input.name}")
-    private String prInputQueueName;
+    @Autowired
+    private PRMessageSender prMessageSender;
 
     @Autowired
     private QueueMessagingTemplate queueMessagingTemplate;
 
     @PostMapping("/sendPRMessage")
     public void sendPRMessage(@RequestBody final String message) {
-        queueMessagingTemplate.convertAndSend(prInputQueueName, message);
-        LOGGER.info("PR message sent to queue: {}", prInputQueueName);
+        prMessageSender.sendMessage(message);
     }
 
     @PostMapping("/fakePriorServiceData")
