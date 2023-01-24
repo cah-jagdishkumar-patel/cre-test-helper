@@ -12,7 +12,7 @@ fly -t cre-test-helper destroy-pipeline -p cre-test-helper
 fly -t cre-test-helper set-pipeline -c deploy/pipeline.yml -p cre-test-helper
 fly -t cre-test-helper unpause-pipeline -p cre-test-helper
 fly -t cre-test-helper expose-pipeline -p cre-test-helper
-./gradlew build -x testClasses
+SPRING_PROFILES_ACTIVE=stage  ./gradlew build -x testClasses
 #cf login -a https://api.system.np1.fuseapps.io
 #cf push -f deploy/manifest-stage.yml -p build/libs/cre-test-helper-0.0.1-SNAPSHOT.jar
 

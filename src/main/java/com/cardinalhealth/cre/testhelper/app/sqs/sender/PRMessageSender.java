@@ -1,4 +1,4 @@
-package com.cardinalhealth.cre.testhelper.sqs.sender;
+package com.cardinalhealth.cre.testhelper.app.sqs.sender;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

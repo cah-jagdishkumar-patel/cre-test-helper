@@ -1,10 +1,10 @@
-package com.cardinalhealth.cre.testhelper;
+package com.cardinalhealth.cre.testhelper.app;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TestHelperApplicationTests {
+class TestHelperAppTests {
 
     @Test
     void contextLoads() {

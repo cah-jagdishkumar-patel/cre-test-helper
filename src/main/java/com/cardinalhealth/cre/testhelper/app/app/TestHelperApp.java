@@ -1,13 +1,13 @@
-package com.cardinalhealth.cre.testhelper;
+package com.cardinalhealth.cre.testhelper.app.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TestHelperApplication {
+public class TestHelperApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(TestHelperApplication.class, args);
+        SpringApplication.run(TestHelperApp.class, args);
     }
 
 }

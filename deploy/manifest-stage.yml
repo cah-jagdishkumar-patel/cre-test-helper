@@ -11,4 +11,5 @@ applications:
     env:
       JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+}}'
       ENVIRONMENT: stage
+      SPRING_PROFILES_ACTIVE: stage
       LOGGING_LEVEL_ROOT: INFO

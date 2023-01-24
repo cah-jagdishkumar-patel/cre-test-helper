@@ -9,7 +9,7 @@
   "needsConnectDb" : false,
   "dbType" : "",
   "hasFlyway": false,
-  "pcfOrganization": "strikers",
+  "pcfOrganization": "clinical-rules-engine",
   "type": "java",
   "gradleBuild": true,
   "gradleIntegrationTests": true,

@@ -1,6 +1,6 @@
-package com.cardinalhealth.cre.testhelper.controller;
+package com.cardinalhealth.cre.testhelper.app.controller;
 
-import com.cardinalhealth.cre.testhelper.sqs.sender.PRMessageSender;
+import com.cardinalhealth.cre.testhelper.app.sqs.sender.PRMessageSender;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

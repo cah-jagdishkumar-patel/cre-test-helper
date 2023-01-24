@@ -1,4 +1,4 @@
-package com.cardinalhealth.cre.testhelper.sqs.config;
+package com.cardinalhealth.cre.testhelper.app.app;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -15,7 +15,7 @@ import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.converter.MessageConverter;
 
 @Configuration
-public class SQSConfig {
+public class AppConfig {
 
     @Value("${cloud.aws.region.static}")
     private String region;

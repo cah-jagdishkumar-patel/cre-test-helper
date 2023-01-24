@@ -1,4 +1,4 @@
-package com.cardinalhealth.cre.testhelper.sqs.receiver;
+package com.cardinalhealth.cre.testhelper.app.sqs.receiver;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
