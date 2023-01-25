@@ -1,4 +1,4 @@
-package com.cardinalhealth.cre.testhelper.app.app;
+package com.cardinalhealth.cre.testhelper.app;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
