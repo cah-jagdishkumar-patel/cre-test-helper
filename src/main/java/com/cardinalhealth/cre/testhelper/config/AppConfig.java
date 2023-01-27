@@ -11,6 +11,7 @@ import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Profile;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.converter.MessageConverter;
 
@@ -29,6 +30,7 @@ public class AppConfig {
     @Value("${cloud.aws.queue.uri}")
     private String sqsUrl;
 
+    @Profile("!test")
     @Bean
     @Primary
     public AmazonSQSAsync amazonSQSAsync() {
