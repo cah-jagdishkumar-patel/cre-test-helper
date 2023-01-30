@@ -1,6 +1,6 @@
 plugins {
     id 'connect-nexus' version '0.47.0'
-    id 'connect-nexus-publish' version '0.38.0'
+    id 'connect-nexus-publish' version '0.47.0'
     id 'java'
     id 'maven-publish'
     id 'org.springframework.boot' version '2.7.7'
