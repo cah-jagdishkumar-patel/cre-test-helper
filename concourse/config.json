@@ -18,6 +18,7 @@
   "sureFireReports": false,
   "makeDocumentation": false,
   "veracodeScanPRs": false,
+  "services" : ["cre-test-helper-creds"],
   "cf": {
     "stage": {
       "instances": 1,

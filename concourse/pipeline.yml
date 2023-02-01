@@ -51,7 +51,7 @@ resources:
 - name: tools
   type: git
   version:
-    ref: 7c39bae8523545ef948f08fbb486ee05dfaeb981
+    ref: ba499f0fac110ca25aba4e96b67748824dc349d6
   icon: git
   check_every: 5m
   source:
@@ -128,7 +128,7 @@ jobs:
             <<: *artifacts-creds
         run:
           path: echo
-          args:  [ Generated using https://github.com/cahcommercial/outcomes-pipeline-tools commit 7c39bae8523545ef948f08fbb486ee05dfaeb981 ]
+          args:  [ Generated using https://github.com/cahcommercial/outcomes-pipeline-tools commit ba499f0fac110ca25aba4e96b67748824dc349d6 ]
 - name: deploy-to-stage
   plan:
     - get: tools
@@ -215,7 +215,7 @@ jobs:
         CF_SPACE: stage
         CF_INSTANCES: 1
         CF_MEMORY: 4g
-        CF_SERVICES:
+        CF_SERVICES: cre-test-helper-creds
         ADD_HEALTHCHECK: false
         NAME: cre-test-helper
         APM_LOG_LEVEL: info
