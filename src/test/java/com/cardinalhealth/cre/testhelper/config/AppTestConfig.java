@@ -1,10 +1,10 @@
 package com.cardinalhealth.cre.testhelper.config;
 
 import com.amazonaws.services.sqs.AmazonSQSAsync;
+import io.awspring.cloud.messaging.config.SimpleMessageListenerContainerFactory;
+import io.awspring.cloud.messaging.listener.QueueMessageHandler;
+import io.awspring.cloud.messaging.listener.SimpleMessageListenerContainer;
 import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.cloud.aws.messaging.config.SimpleMessageListenerContainerFactory;
-import org.springframework.cloud.aws.messaging.listener.QueueMessageHandler;
-import org.springframework.cloud.aws.messaging.listener.SimpleMessageListenerContainer;
 import org.springframework.context.annotation.Bean;
 
 import static org.mockito.Mockito.mock;

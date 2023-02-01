@@ -3,7 +3,7 @@ plugins {
     id 'connect-nexus-publish' version '0.47.0'
     id 'java'
     id 'maven-publish'
-    id 'org.springframework.boot' version '2.7.7'
+    id 'org.springframework.boot' version '3.0.2'
     id 'io.spring.dependency-management' version '1.1.0'
 }
 
@@ -16,7 +16,7 @@ apply plugin: 'io.spring.dependency-management'
 
 group = 'com.cardinalhealth.cre'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '17'
 
 configurations {
     compileOnly {
@@ -31,7 +31,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.cloud:spring-cloud-starter-aws-messaging'
+    implementation 'io.awspring.cloud:spring-cloud-starter-aws-messaging'
     implementation 'org.json:json:20220924'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -43,7 +43,7 @@ dependencies {
 
 dependencyManagement {
     imports {
-        mavenBom 'org.springframework.cloud:spring-cloud-aws:2.2.6.RELEASE'
+        mavenBom 'io.awspring.cloud:spring-cloud-aws-dependencies:2.4.3'
     }
 }
 
