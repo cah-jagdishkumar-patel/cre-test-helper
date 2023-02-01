@@ -51,7 +51,7 @@ resources:
 - name: tools
   type: git
   version:
-    ref: e2a8db8b7a5e433336db3428915b838d13233d5f
+    ref: 7c39bae8523545ef948f08fbb486ee05dfaeb981
   icon: git
   check_every: 5m
   source:
@@ -71,8 +71,8 @@ resources:
   icon: clock-outline
   check_every: 15m
   source:
-    start: 01:00 AM
-    stop: 01:15 AM
+    start: 04:10 AM
+    stop: 04:25 AM
     location: America/Chicago
     days: [Monday, Tuesday, Wednesday, Thursday, Friday]
 - name: nexus-snapshot
@@ -128,7 +128,7 @@ jobs:
             <<: *artifacts-creds
         run:
           path: echo
-          args:  [ Generated using https://github.com/cahcommercial/outcomes-pipeline-tools commit e2a8db8b7a5e433336db3428915b838d13233d5f ]
+          args:  [ Generated using https://github.com/cahcommercial/outcomes-pipeline-tools commit 7c39bae8523545ef948f08fbb486ee05dfaeb981 ]
 - name: deploy-to-stage
   plan:
     - get: tools
@@ -147,7 +147,7 @@ jobs:
             tag: latest
             username: ((artifacts.username))
             password: ((artifacts.password))
-            repository: artifacts.cahcommtech.com/pipeline-tools
+            repository: artifacts.cahcommtech.com/pipeline-tools17
         params:
           VERSION_FILE:
           NAME:
@@ -180,7 +180,7 @@ jobs:
             tag: latest
             username: ((artifacts.username))
             password: ((artifacts.password))
-            repository: artifacts.cahcommtech.com/pipeline-tools
+            repository: artifacts.cahcommtech.com/pipeline-tools17
         params:
           VERSION_FILE:
           BUILD_TYPE:
@@ -196,6 +196,7 @@ jobs:
           CF_SERVICES:
           ADD_HEALTHCHECK:
           NAME:
+          APM_LOG_LEVEL:
         run:
           path: tools/tasks/deploy.sh
         inputs:
@@ -210,13 +211,14 @@ jobs:
         CF_EXTERNAL_HOST: apps.np1.fuseapps.io
         CF_USERNAME: ((pcf-np1.username))
         CF_PASSWORD: ((pcf-np1.password))
-        CF_ORGANIZATION: strikers
+        CF_ORGANIZATION: clinical-rules-engine
         CF_SPACE: stage
         CF_INSTANCES: 1
         CF_MEMORY: 4g
         CF_SERVICES:
         ADD_HEALTHCHECK: false
         NAME: cre-test-helper
+        APM_LOG_LEVEL: info
       input_mapping:
         target: target
         version: version-stage
@@ -243,7 +245,7 @@ jobs:
             tag: latest
             username: ((artifacts.username))
             password: ((artifacts.password))
-            repository: artifacts.cahcommtech.com/pipeline-tools
+            repository: artifacts.cahcommtech.com/pipeline-tools17
         params:
           BUILD_TYPE:
           GRADLE_BUILD:
@@ -299,7 +301,7 @@ jobs:
             tag: latest
             username: ((artifacts.username))
             password: ((artifacts.password))
-            repository: artifacts.cahcommtech.com/pipeline-tools
+            repository: artifacts.cahcommtech.com/pipeline-tools17
         params:
           BUILD_TYPE:
           VERSION_FILE:
@@ -361,7 +363,7 @@ jobs:
             tag: latest
             username: ((artifacts.username))
             password: ((artifacts.password))
-            repository: artifacts.cahcommtech.com/pipeline-tools
+            repository: artifacts.cahcommtech.com/pipeline-tools17
         params:
           BUILD_TYPE:
           GRADLE_BUILD:
