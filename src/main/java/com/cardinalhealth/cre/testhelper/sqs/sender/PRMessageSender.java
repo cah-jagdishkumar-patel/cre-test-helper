@@ -18,7 +18,7 @@ public class PRMessageSender {
     @Autowired
     private QueueMessagingTemplate queueMessagingTemplate;
 
-    public void sendMessage(final String message) {
+    public void sendMessage(String message) {
         if(!StringUtils.hasText(message)) {
             final String errorMessage = "empty message";
             LOGGER.error(errorMessage);

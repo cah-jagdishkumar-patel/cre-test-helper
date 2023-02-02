@@ -23,25 +23,25 @@ public class TestHelperController {
     private PRMessageSender prMessageSender;
 
     @PostMapping("/sendPRMessage")
-    public void sendPRMessage(@RequestBody final String message) {
+    public void sendPRMessage(@RequestBody String message) {
         prMessageSender.sendMessage(message);
     }
 
     @PostMapping("/fakePriorServiceData")
-    public Map<String,Object> fakePriorServiceData(final String patientId) {
+    public Map<String,Object> fakePriorServiceData(String patientId) {
         String data = "{}";
         try {
             Resource resource = new ClassPathResource(String.format("static/%s_FakePriorServiceData.json", patientId));
             data = Files.readString(Path.of(resource.getURL().getPath()));
         } catch (IOException e) {
-            final String errorMessage = String.format("error reading fake prior service data for %s", patientId);
+            String errorMessage = String.format("error reading fake prior service data for %s", patientId);
             LOGGER.error(errorMessage);
         }
         return new JSONObject(data).toMap();
     }
 
     @PostMapping("/fakeServiceData")
-    public String fakeServiceData(final String patientId, final String valueList) {
+    public String fakeServiceData(String patientId, String valueList) {
         return "0.5";
     }
 }
