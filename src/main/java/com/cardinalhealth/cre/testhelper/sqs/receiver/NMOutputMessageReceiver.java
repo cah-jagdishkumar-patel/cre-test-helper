@@ -22,9 +22,10 @@ public class NMOutputMessageReceiver {
         }
         JSONObject messageObject = new JSONObject(message);
         String patientId = messageObject.optString("patientId");
-        String programId = messageObject.optString("programId");
+        Integer policyId = messageObject.optInt("policyId");
+        Integer serviceTypeId = messageObject.optInt("serviceTypeId");
         String serviceId = messageObject.optString("serviceId");
         boolean eligible = messageObject.optBoolean("eligible");
-        LOGGER.info("NM Output message processed for patient: {}, program: {}, service: {}, eligible: {}", patientId, programId, serviceId, eligible);
+        LOGGER.info("NM Output message processed for patient: {}, policy: {}, serviceType: {}, service: {}, eligible: {}", patientId, policyId, serviceTypeId, serviceId, eligible);
     }
 }
