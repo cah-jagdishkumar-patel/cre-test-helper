@@ -24,7 +24,7 @@ public class NMOutputMessageReceiver {
         String patientId = messageObject.optString("patientId");
         Integer policyId = messageObject.optInt("policyId");
         Integer serviceTypeId = messageObject.optInt("serviceTypeId");
-        String serviceId = messageObject.optString("serviceId");
+        Integer serviceId = messageObject.optInt("serviceId");
         boolean eligible = messageObject.optBoolean("eligible");
         LOGGER.info("NM Output message processed for patient: {}, policy: {}, serviceType: {}, service: {}, eligible: {}", patientId, policyId, serviceTypeId, serviceId, eligible);
     }
