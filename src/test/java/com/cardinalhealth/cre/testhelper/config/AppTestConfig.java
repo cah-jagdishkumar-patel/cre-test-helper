@@ -22,6 +22,7 @@ public class AppTestConfig {
         simpleMessageListenerContainer.setMessageHandler(messageHandler());
         return simpleMessageListenerContainer;
     }
+
     @Bean
     public QueueMessageHandler messageHandler() {
         return mock(QueueMessageHandler.class);

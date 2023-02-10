@@ -19,7 +19,7 @@ public class PRMessageSender {
     private QueueMessagingTemplate queueMessagingTemplate;
 
     public void sendMessage(String message) {
-        if(!StringUtils.hasText(message)) {
+        if (!StringUtils.hasText(message)) {
             final String errorMessage = "empty message";
             LOGGER.error(errorMessage);
             throw new RuntimeException(errorMessage);

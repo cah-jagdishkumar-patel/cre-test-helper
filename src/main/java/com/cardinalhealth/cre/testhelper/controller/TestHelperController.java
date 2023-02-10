@@ -28,7 +28,7 @@ public class TestHelperController {
     }
 
     @PostMapping("/fakePriorServiceData")
-    public Map<String,Object> fakePriorServiceData(String patientId) {
+    public Map<String, Object> fakePriorServiceData(String patientId) {
         String data = "{}";
         try {
             Resource resource = new ClassPathResource(String.format("static/%s_FakePriorServiceData.json", patientId));

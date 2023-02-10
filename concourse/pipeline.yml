@@ -6,411 +6,411 @@ slack-channel: &slack-channel
 prod-slack-channel: &prod-slack-channel
   channel: #connect-deployment
 resource_types:
-- name: slack-notification
-  type: registry-image
-  source:
-    tag: latest
-    <<: *artifacts-creds
-    repository: artifacts.cahcommtech.com/cfcommunity/slack-notification-resource
-- name: meta
-  type: registry-image
-  source:
-    <<: *artifacts-creds
-    repository: artifacts.cahcommtech.com/swce/metadata-resource
-- name: pull-request
-  type: registry-image
-  source:
-    <<: *artifacts-creds
-    repository: artifacts.cahcommtech.com/fuse/pr
-- name: maven-resource
-  type: registry-image
-  source:
-    <<: *artifacts-creds
-    repository: artifacts.cahcommtech.com/maven-resource
+  - name: slack-notification
+    type: registry-image
+    source:
+      tag: latest
+      <<: *artifacts-creds
+      repository: artifacts.cahcommtech.com/cfcommunity/slack-notification-resource
+  - name: meta
+    type: registry-image
+    source:
+      <<: *artifacts-creds
+      repository: artifacts.cahcommtech.com/swce/metadata-resource
+  - name: pull-request
+    type: registry-image
+    source:
+      <<: *artifacts-creds
+      repository: artifacts.cahcommtech.com/fuse/pr
+  - name: maven-resource
+    type: registry-image
+    source:
+      <<: *artifacts-creds
+      repository: artifacts.cahcommtech.com/maven-resource
 resources:
-- name: meta
-  type: meta
-  source:
-- name: source
-  type: git
-  icon: git
-  check_every: 1m
-  source:
-    uri: git@github.com:cahcommercial/cre-test-helper
-    private_key: ((deploy-keys.cre-test-helper))
-    branch: main
-- name: week-day-morning
-  type: time
-  icon: clock-outline
-  check_every: 60m
-  source:
-    start: 7:00 AM
-    stop: 8:30 AM
-    location: America/Chicago
-    days: [Monday, Tuesday, Wednesday, Thursday, Friday]
-- name: tools
-  type: git
-  version:
-    ref: ba499f0fac110ca25aba4e96b67748824dc349d6
-  icon: git
-  check_every: 5m
-  source:
-    uri: git@github.com:cahcommercial/outcomes-pipeline-tools
-    branch: master
-    private_key: ((deploy-keys.connect-sidecar-tools))
-- name: pr
-  type: pull-request
-  icon: source-pull
-  check_every: 1m
-  source:
-    repo: cahcommercial/cre-test-helper
-    access_token: ((concourse-github-access-token))
-    base: main
-- name: nightly-weekday
-  type: time
-  icon: clock-outline
-  check_every: 15m
-  source:
-    start: 04:10 AM
-    stop: 04:25 AM
-    location: America/Chicago
-    days: [Monday, Tuesday, Wednesday, Thursday, Friday]
-- name: nexus-snapshot
-  type: maven-resource
-  icon: source-repository
-  check_every: 5m
-  source:
-    snapshot_url: https://artifacts.cahcommtech.com/repository/commtech-internal-snapshots/
-    artifact: com.cardinalhealth.cre:cre-test-helper:jar
-    debug: true
-    <<: *artifacts-creds
-- name: slack-alert
-  type: slack-notification
-  icon: slack
-  source:
-    url: ((connect-deploy-slack-webhook-url))
-- name: version
-  type: git
-  icon: numeric
-  check_every: 5m
-  source:
-    uri: git@github.com:cahcommercial/cre-test-helper.git
-    branch: version
-    private_key: ((deploy-keys.cre-test-helper))
-- name: version-stage
-  type: git
-  icon: numeric
-  check_every: 30m
-  source:
-    paths: [stage]
-    uri: git@github.com:cahcommercial/cre-test-helper.git
-    private_key: ((deploy-keys.cre-test-helper))
-    branch: version
+  - name: meta
+    type: meta
+    source:
+  - name: source
+    type: git
+    icon: git
+    check_every: 1m
+    source:
+      uri: git@github.com:cahcommercial/cre-test-helper
+      private_key: ((deploy-keys.cre-test-helper))
+      branch: main
+  - name: week-day-morning
+    type: time
+    icon: clock-outline
+    check_every: 60m
+    source:
+      start: 7:00 AM
+      stop: 8:30 AM
+      location: America/Chicago
+      days: [ Monday, Tuesday, Wednesday, Thursday, Friday ]
+  - name: tools
+    type: git
+    version:
+      ref: ba499f0fac110ca25aba4e96b67748824dc349d6
+    icon: git
+    check_every: 5m
+    source:
+      uri: git@github.com:cahcommercial/outcomes-pipeline-tools
+      branch: master
+      private_key: ((deploy-keys.connect-sidecar-tools))
+  - name: pr
+    type: pull-request
+    icon: source-pull
+    check_every: 1m
+    source:
+      repo: cahcommercial/cre-test-helper
+      access_token: ((concourse-github-access-token))
+      base: main
+  - name: nightly-weekday
+    type: time
+    icon: clock-outline
+    check_every: 15m
+    source:
+      start: 04:10 AM
+      stop: 04:25 AM
+      location: America/Chicago
+      days: [ Monday, Tuesday, Wednesday, Thursday, Friday ]
+  - name: nexus-snapshot
+    type: maven-resource
+    icon: source-repository
+    check_every: 5m
+    source:
+      snapshot_url: https://artifacts.cahcommtech.com/repository/commtech-internal-snapshots/
+      artifact: com.cardinalhealth.cre:cre-test-helper:jar
+      debug: true
+      <<: *artifacts-creds
+  - name: slack-alert
+    type: slack-notification
+    icon: slack
+    source:
+      url: ((connect-deploy-slack-webhook-url))
+  - name: version
+    type: git
+    icon: numeric
+    check_every: 5m
+    source:
+      uri: git@github.com:cahcommercial/cre-test-helper.git
+      branch: version
+      private_key: ((deploy-keys.cre-test-helper))
+  - name: version-stage
+    type: git
+    icon: numeric
+    check_every: 30m
+    source:
+      paths: [ stage ]
+      uri: git@github.com:cahcommercial/cre-test-helper.git
+      private_key: ((deploy-keys.cre-test-helper))
+      branch: version
 groups:
-- name: development
-  jobs:
-  - display-pipeline-version
-  - main-build
-  - test-pr
-- name: deploy
-  jobs:
-  - deploy-to-stage
+  - name: development
+    jobs:
+      - display-pipeline-version
+      - main-build
+      - test-pr
+  - name: deploy
+    jobs:
+      - deploy-to-stage
 jobs:
-- name: display-pipeline-version
-  plan:
-    - task: display-version
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source:
-            repository: ((artifacts.url))/busybox
-            <<: *artifacts-creds
-        run:
-          path: echo
-          args:  [ Generated using https://github.com/cahcommercial/outcomes-pipeline-tools commit ba499f0fac110ca25aba4e96b67748824dc349d6 ]
-- name: deploy-to-stage
-  plan:
-    - get: tools
-    - get: version-stage
-      trigger: true
-    - put: slack-alert
-      params:
-        <<: *slack-channel
-        text: "Deploying cre-test-helper to stage"
-    - task: nexus_download
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source:
-            tag: latest
-            username: ((artifacts.username))
-            password: ((artifacts.password))
-            repository: artifacts.cahcommtech.com/pipeline-tools17
+  - name: display-pipeline-version
+    plan:
+      - task: display-version
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: ((artifacts.url))/busybox
+              <<: *artifacts-creds
+          run:
+            path: echo
+            args: [ Generated using https://github.com/cahcommercial/outcomes-pipeline-tools commit ba499f0fac110ca25aba4e96b67748824dc349d6 ]
+  - name: deploy-to-stage
+    plan:
+      - get: tools
+      - get: version-stage
+        trigger: true
+      - put: slack-alert
         params:
-          VERSION_FILE:
-          NAME:
-          ARTIFACT_EXTENSION:
-          GROUP_ID: com.cardinalhealth.connect
-          NEXUS_USERNAME: ((artifacts.username))
-          NEXUS_PASSWORD: ((artifacts.password))
-        run:
-          path: tools/tasks/nexus_download.sh
-        inputs:
-        - name: tools
-        - name: version
-        outputs:
-        - name: target
-      params:
-        VERSION_FILE: stage
-        ARTIFACT_EXTENSION: jar
-        GROUP_ID: com.cardinalhealth.cre
-        NAME: cre-test-helper
-      input_mapping:
-        version: version-stage
-      output_mapping:
-        target: target
-    - task: deploy
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source:
-            tag: latest
-            username: ((artifacts.username))
-            password: ((artifacts.password))
-            repository: artifacts.cahcommtech.com/pipeline-tools17
+          <<: *slack-channel
+          text: "Deploying cre-test-helper to stage"
+      - task: nexus_download
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              tag: latest
+              username: ((artifacts.username))
+              password: ((artifacts.password))
+              repository: artifacts.cahcommtech.com/pipeline-tools17
+          params:
+            VERSION_FILE:
+            NAME:
+            ARTIFACT_EXTENSION:
+            GROUP_ID: com.cardinalhealth.connect
+            NEXUS_USERNAME: ((artifacts.username))
+            NEXUS_PASSWORD: ((artifacts.password))
+          run:
+            path: tools/tasks/nexus_download.sh
+          inputs:
+            - name: tools
+            - name: version
+          outputs:
+            - name: target
         params:
-          VERSION_FILE:
-          BUILD_TYPE:
-          CF_APIHOST:
-          CF_HOST:
-          CF_EXTERNAL_HOST:
-          CF_USERNAME:
-          CF_PASSWORD:
-          CF_ORGANIZATION:
-          CF_SPACE:
-          CF_INSTANCES:
-          CF_MEMORY:
-          CF_SERVICES:
-          ADD_HEALTHCHECK:
-          NAME:
-          APM_LOG_LEVEL:
-        run:
-          path: tools/tasks/deploy.sh
-        inputs:
-        - name: tools
-        - name: target
-        - name: version
-      params:
-        VERSION_FILE: stage
-        BUILD_TYPE: java
-        CF_APIHOST: api.system.np1.fuseapps.io
-        CF_HOST: apps.internal
-        CF_EXTERNAL_HOST: apps.np1.fuseapps.io
-        CF_USERNAME: ((pcf-np1.username))
-        CF_PASSWORD: ((pcf-np1.password))
-        CF_ORGANIZATION: clinical-rules-engine
-        CF_SPACE: stage
-        CF_INSTANCES: 1
-        CF_MEMORY: 4g
-        CF_SERVICES: cre-test-helper-creds
-        ADD_HEALTHCHECK: false
-        NAME: cre-test-helper
-        APM_LOG_LEVEL: info
-      input_mapping:
-        target: target
-        version: version-stage
-    - put: slack-alert
-      params:
-        <<: *slack-channel
-        text: "cre-test-helper stage deployment complete"
-- name: main-build
-  plan:
-    - get: nightly-weekday
-      trigger: true
-    - get: tools
-    - get: version
-    - get: meta
-    - get: source
-      trigger: true
-    - task: run_tests
-      privileged: true
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source:
-            tag: latest
-            username: ((artifacts.username))
-            password: ((artifacts.password))
-            repository: artifacts.cahcommtech.com/pipeline-tools17
+          VERSION_FILE: stage
+          ARTIFACT_EXTENSION: jar
+          GROUP_ID: com.cardinalhealth.cre
+          NAME: cre-test-helper
+        input_mapping:
+          version: version-stage
+        output_mapping:
+          target: target
+      - task: deploy
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              tag: latest
+              username: ((artifacts.username))
+              password: ((artifacts.password))
+              repository: artifacts.cahcommtech.com/pipeline-tools17
+          params:
+            VERSION_FILE:
+            BUILD_TYPE:
+            CF_APIHOST:
+            CF_HOST:
+            CF_EXTERNAL_HOST:
+            CF_USERNAME:
+            CF_PASSWORD:
+            CF_ORGANIZATION:
+            CF_SPACE:
+            CF_INSTANCES:
+            CF_MEMORY:
+            CF_SERVICES:
+            ADD_HEALTHCHECK:
+            NAME:
+            APM_LOG_LEVEL:
+          run:
+            path: tools/tasks/deploy.sh
+          inputs:
+            - name: tools
+            - name: target
+            - name: version
         params:
-          BUILD_TYPE:
-          GRADLE_BUILD:
-          GRADLE_INTEGRATION_TESTS:
+          VERSION_FILE: stage
+          BUILD_TYPE: java
+          CF_APIHOST: api.system.np1.fuseapps.io
+          CF_HOST: apps.internal
+          CF_EXTERNAL_HOST: apps.np1.fuseapps.io
+          CF_USERNAME: ((pcf-np1.username))
+          CF_PASSWORD: ((pcf-np1.password))
+          CF_ORGANIZATION: clinical-rules-engine
+          CF_SPACE: stage
+          CF_INSTANCES: 1
+          CF_MEMORY: 4g
+          CF_SERVICES: cre-test-helper-creds
+          ADD_HEALTHCHECK: false
+          NAME: cre-test-helper
+          APM_LOG_LEVEL: info
+        input_mapping:
+          target: target
+          version: version-stage
+      - put: slack-alert
+        params:
+          <<: *slack-channel
+          text: "cre-test-helper stage deployment complete"
+  - name: main-build
+    plan:
+      - get: nightly-weekday
+        trigger: true
+      - get: tools
+      - get: version
+      - get: meta
+      - get: source
+        trigger: true
+      - task: run_tests
+        privileged: true
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              tag: latest
+              username: ((artifacts.username))
+              password: ((artifacts.password))
+              repository: artifacts.cahcommtech.com/pipeline-tools17
+          params:
+            BUILD_TYPE:
+            GRADLE_BUILD:
+            GRADLE_INTEGRATION_TESTS:
+            DB_TYPE:
+            NEEDS_DB:
+            HAS_FLYWAY:
+            NEEDS_CONNECT_DB:
+            GIT_USERNAME:
+            GIT_PASSWORD:
+            GIT_REGISTRY_TOKEN:
+            NEXUS_USERNAME: ((artifacts.username))
+            NEXUS_PASSWORD: ((artifacts.password))
+          run:
+            path: tools/tasks/run_tests.sh
+          inputs:
+            - name: tools
+            - name: meta
+            - name: source
+            - name: version
+          container_limits:
+            memory: 5368709120
+          outputs:
+            - name: package
+            - name: test-output
+            - name: pacts
+        params:
+          BUILD_TYPE: java
+          GRADLE_BUILD: true
+          GRADLE_INTEGRATION_TESTS: true
+          NEEDS_DB: false
           DB_TYPE:
-          NEEDS_DB:
-          HAS_FLYWAY:
-          NEEDS_CONNECT_DB:
-          GIT_USERNAME:
-          GIT_PASSWORD:
-          GIT_REGISTRY_TOKEN:
+          HAS_FLYWAY: false
+          NEEDS_CONNECT_DB: false
+          NEEDS_LEGACY_DB: false
           NEXUS_USERNAME: ((artifacts.username))
           NEXUS_PASSWORD: ((artifacts.password))
-        run:
-          path: tools/tasks/run_tests.sh
-        inputs:
-        - name: tools
-        - name: meta
-        - name: source
-        - name: version
-        container_limits:
-          memory: 5368709120
-        outputs:
-        - name: package
-        - name: test-output
-        - name: pacts
-      params:
-        BUILD_TYPE: java
-        GRADLE_BUILD: true
-        GRADLE_INTEGRATION_TESTS: true
-        NEEDS_DB: false
-        DB_TYPE:
-        HAS_FLYWAY: false
-        NEEDS_CONNECT_DB: false
-        NEEDS_LEGACY_DB: false
-        NEXUS_USERNAME: ((artifacts.username))
-        NEXUS_PASSWORD: ((artifacts.password))
-        GIT_USERNAME: ((github.username))
-        GIT_PASSWORD: ((github.password))
-        GIT_REGISTRY_TOKEN: ((concourse-github-access-token))
-        ADD_CYPRESS: false
-      on_failure:
-        put: slack-alert
+          GIT_USERNAME: ((github.username))
+          GIT_PASSWORD: ((github.password))
+          GIT_REGISTRY_TOKEN: ((concourse-github-access-token))
+          ADD_CYPRESS: false
+        on_failure:
+          put: slack-alert
+          params:
+            <<: *slack-channel
+            text: ":party-vest: cre-test-helper main unit tests failed :party-vest:"
+      - task: generate_snapshot_artifact
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              tag: latest
+              username: ((artifacts.username))
+              password: ((artifacts.password))
+              repository: artifacts.cahcommtech.com/pipeline-tools17
+          params:
+            BUILD_TYPE:
+            VERSION_FILE:
+            PUBLISH_CONSUMER_PACTS:
+          run:
+            path: tools/tasks/publish.sh
+          inputs:
+            - name: tools
+            - name: package
+            - name: version
+            - name: source
+          outputs:
+            - name: target
+          caches:
+            - path: source/node_modules
         params:
-          <<: *slack-channel
-          text: ":party-vest: cre-test-helper main unit tests failed :party-vest:"
-    - task: generate_snapshot_artifact
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source:
-            tag: latest
-            username: ((artifacts.username))
-            password: ((artifacts.password))
-            repository: artifacts.cahcommtech.com/pipeline-tools17
+          BUILD_TYPE: java
+          VERSION_FILE: snapshot
+          PUBLISH_CONSUMER_PACTS: false
+        input_mapping:
+          package: package
+        output_mapping:
+          target: target
+        on_failure:
+          put: slack-alert
+          params:
+            <<: *slack-channel
+            text: ":camera_with_flash: cre-test-helper generate snapshot artifact failed :camera_with_flash:"
+      - put: nexus-snapshot
         params:
-          BUILD_TYPE:
-          VERSION_FILE:
-          PUBLISH_CONSUMER_PACTS:
-        run:
-          path: tools/tasks/publish.sh
-        inputs:
-        - name: tools
-        - name: package
-        - name: version
-        - name: source
-        outputs:
-        - name: target
-        caches:
-        - path: source/node_modules
-      params:
-        BUILD_TYPE: java
-        VERSION_FILE: snapshot
-        PUBLISH_CONSUMER_PACTS: false
-      input_mapping:
-        package: package
-      output_mapping:
-        target: target
-      on_failure:
-        put: slack-alert
-        params:
-          <<: *slack-channel
-          text: ":camera_with_flash: cre-test-helper generate snapshot artifact failed :camera_with_flash:"
-    - put: nexus-snapshot
-      params:
-        file: target/*.jar
-        version_file: version/snapshot
-      on_failure:
-        put: slack-alert
-        params:
-          <<: *slack-channel
-          text: ":thanos_snap: cre-test-helper snapshot push failed :thanos_snap:"
-          attachments:
-          - color: "#bc091e"
-            text: ":alert_shiny:"
-- name: test-pr
-  plan:
-    - get: meta
-    - get: tools
-    - get: pr
-      version: every
-      trigger: true
-    - put: pr
-      params:
-        path: pr
-        status: pending
-    - task: test-pr
-      privileged: true
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source:
-            tag: latest
-            username: ((artifacts.username))
-            password: ((artifacts.password))
-            repository: artifacts.cahcommtech.com/pipeline-tools17
-        params:
-          BUILD_TYPE:
-          GRADLE_BUILD:
-          GRADLE_INTEGRATION_TESTS:
-          DB_TYPE:
-          NEEDS_DB:
-          HAS_FLYWAY:
-          NEEDS_CONNECT_DB:
-          GIT_USERNAME:
-          GIT_PASSWORD:
-          GIT_REGISTRY_TOKEN:
-          NEXUS_USERNAME: ((artifacts.username))
-          NEXUS_PASSWORD: ((artifacts.password))
-        run:
-          path: tools/tasks/run_tests.sh
-        inputs:
-        - name: tools
-        - name: meta
-        - name: pr
-          path: source
-        container_limits:
-          memory: 5368709120
-        outputs:
-        - name: package
-        - name: test-output
-      params:
-        BUILD_TYPE: java
-        GRADLE_BUILD: true
-        GRADLE_INTEGRATION_TESTS: true
-        NEEDS_DB: false
-        DB_TYPE:
-        HAS_FLYWAY: false
-        NEEDS_CONNECT_DB: false
-        NEEDS_LEGACY_DB: false
-        NEXUS_USERNAME: ((artifacts.username))
-        NEXUS_PASSWORD: ((artifacts.password))
-        GIT_USERNAME: ((github.username))
-        GIT_PASSWORD: ((github.password))
-        GIT_REGISTRY_TOKEN: ((concourse-github-access-token))
-        ADD_CYPRESS: false
-      on_failure:
-        put: pr
+          file: target/*.jar
+          version_file: version/snapshot
+        on_failure:
+          put: slack-alert
+          params:
+            <<: *slack-channel
+            text: ":thanos_snap: cre-test-helper snapshot push failed :thanos_snap:"
+            attachments:
+              - color: "#bc091e"
+                text: ":alert_shiny:"
+  - name: test-pr
+    plan:
+      - get: meta
+      - get: tools
+      - get: pr
+        version: every
+        trigger: true
+      - put: pr
         params:
           path: pr
-          status: failure
-      on_success:
-        put: pr
+          status: pending
+      - task: test-pr
+        privileged: true
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              tag: latest
+              username: ((artifacts.username))
+              password: ((artifacts.password))
+              repository: artifacts.cahcommtech.com/pipeline-tools17
+          params:
+            BUILD_TYPE:
+            GRADLE_BUILD:
+            GRADLE_INTEGRATION_TESTS:
+            DB_TYPE:
+            NEEDS_DB:
+            HAS_FLYWAY:
+            NEEDS_CONNECT_DB:
+            GIT_USERNAME:
+            GIT_PASSWORD:
+            GIT_REGISTRY_TOKEN:
+            NEXUS_USERNAME: ((artifacts.username))
+            NEXUS_PASSWORD: ((artifacts.password))
+          run:
+            path: tools/tasks/run_tests.sh
+          inputs:
+            - name: tools
+            - name: meta
+            - name: pr
+              path: source
+          container_limits:
+            memory: 5368709120
+          outputs:
+            - name: package
+            - name: test-output
         params:
-          path: pr
-          status: success
+          BUILD_TYPE: java
+          GRADLE_BUILD: true
+          GRADLE_INTEGRATION_TESTS: true
+          NEEDS_DB: false
+          DB_TYPE:
+          HAS_FLYWAY: false
+          NEEDS_CONNECT_DB: false
+          NEEDS_LEGACY_DB: false
+          NEXUS_USERNAME: ((artifacts.username))
+          NEXUS_PASSWORD: ((artifacts.password))
+          GIT_USERNAME: ((github.username))
+          GIT_PASSWORD: ((github.password))
+          GIT_REGISTRY_TOKEN: ((concourse-github-access-token))
+          ADD_CYPRESS: false
+        on_failure:
+          put: pr
+          params:
+            path: pr
+            status: failure
+        on_success:
+          put: pr
+          params:
+            path: pr
+            status: success

@@ -6,19 +6,23 @@
   "concourseTeam": "strikers",
   "needsConnect": false,
   "needsDB": false,
-  "needsConnectDb" : false,
-  "dbType" : "",
+  "needsConnectDb": false,
+  "dbType": "",
   "hasFlyway": false,
   "pcfOrganization": "clinical-rules-engine",
   "type": "java",
   "gradleBuild": true,
   "gradleIntegrationTests": true,
   "deployable": true,
-  "deployToEnvs" : ["stage"],
+  "deployToEnvs": [
+    "stage"
+  ],
   "sureFireReports": false,
   "makeDocumentation": false,
   "veracodeScanPRs": false,
-  "services" : ["cre-test-helper-creds"],
+  "services": [
+    "cre-test-helper-creds"
+  ],
   "cf": {
     "stage": {
       "instances": 1,

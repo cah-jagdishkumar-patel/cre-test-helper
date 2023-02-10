@@ -12,10 +12,10 @@ import org.springframework.util.StringUtils;
 public class NMOutputMessageReceiver {
     private static final Logger LOGGER = LoggerFactory.getLogger(NMOutputMessageReceiver.class);
 
-    @SqsListener(value="${cloud.aws.queue.nm.output.name}", deletionPolicy = SqsMessageDeletionPolicy.ON_SUCCESS)
+    @SqsListener(value = "${cloud.aws.queue.nm.output.name}", deletionPolicy = SqsMessageDeletionPolicy.ON_SUCCESS)
     private void receiveMessage(String message) {
         LOGGER.info("NM Output message received: {}", message);
-        if(!StringUtils.hasText(message)) {
+        if (!StringUtils.hasText(message)) {
             final String errorMessage = "received empty SE Data Ready message";
             LOGGER.error(errorMessage);
             throw new RuntimeException(errorMessage);
