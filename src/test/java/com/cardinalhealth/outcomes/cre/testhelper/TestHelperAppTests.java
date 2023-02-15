@@ -1,6 +1,6 @@
-package com.cardinalhealth.cre.testhelper;
+package com.cardinalhealth.outcomes.cre.testhelper;
 
-import com.cardinalhealth.cre.testhelper.config.AppTestConfig;
+import com.cardinalhealth.outcomes.cre.testhelper.config.AppTestConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;

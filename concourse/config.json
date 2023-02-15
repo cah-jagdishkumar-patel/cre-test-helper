@@ -1,7 +1,7 @@
 {
   "name": "cre-test-helper",
   "repo": "cahcommercial/cre-test-helper",
-  "groupId": "com.cardinalhealth.cre",
+  "groupId": "com.cardinalhealth.outcomes.cre",
   "mainBranch": "main",
   "concourseTeam": "strikers",
   "needsConnect": false,

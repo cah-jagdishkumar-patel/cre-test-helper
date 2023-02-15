@@ -1,4 +1,4 @@
-package com.cardinalhealth.cre.testhelper.sqs.receiver;
+package com.cardinalhealth.outcomes.cre.testhelper.sqs.receiver;
 
 import io.awspring.cloud.messaging.listener.SqsMessageDeletionPolicy;
 import io.awspring.cloud.messaging.listener.annotation.SqsListener;

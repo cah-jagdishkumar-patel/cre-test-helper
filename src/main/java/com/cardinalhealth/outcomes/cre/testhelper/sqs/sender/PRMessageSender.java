@@ -1,4 +1,4 @@
-package com.cardinalhealth.cre.testhelper.sqs.sender;
+package com.cardinalhealth.outcomes.cre.testhelper.sqs.sender;
 
 import io.awspring.cloud.messaging.core.QueueMessagingTemplate;
 import org.slf4j.Logger;
