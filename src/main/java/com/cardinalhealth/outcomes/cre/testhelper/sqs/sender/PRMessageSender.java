@@ -10,7 +10,8 @@ import org.springframework.util.StringUtils;
 
 @Service
 public class PRMessageSender {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PRMessageSender.class);
+    private static final Logger LOGGER =
+        LoggerFactory.getLogger(PRMessageSender.class);
 
     @Value("${cloud.aws.queue.pr.input.name}")
     private String prQueueName;

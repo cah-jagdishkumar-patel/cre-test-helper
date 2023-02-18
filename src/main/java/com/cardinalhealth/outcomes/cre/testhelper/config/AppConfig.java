@@ -35,9 +35,9 @@ public class AppConfig {
     @Primary
     public AmazonSQSAsync amazonSQSAsync() {
         return AmazonSQSAsyncClientBuilder.standard()
-                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(sqsUrl, region))
-                .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessKeyId, secretAccessKey)))
-                .build();
+            .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(sqsUrl, region))
+            .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessKeyId, secretAccessKey)))
+            .build();
     }
 
     @Bean
@@ -52,7 +52,8 @@ public class AppConfig {
 
     @Bean
     protected MessageConverter messageConverter(ObjectMapper objectMapper) {
-        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
+        MappingJackson2MessageConverter converter =
+            new MappingJackson2MessageConverter();
         converter.setObjectMapper(objectMapper);
         converter.setSerializedPayloadClass(String.class);
         converter.setStrictContentTypeMatch(false);

@@ -10,9 +10,11 @@ import org.springframework.util.StringUtils;
 
 @Service
 public class NMOutputMessageReceiver {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NMOutputMessageReceiver.class);
+    private static final Logger LOGGER =
+        LoggerFactory.getLogger(NMOutputMessageReceiver.class);
 
-    @SqsListener(value = "${cloud.aws.queue.nm.output.name}", deletionPolicy = SqsMessageDeletionPolicy.ON_SUCCESS)
+    @SqsListener(value = "${cloud.aws.queue.nm.output.name}", deletionPolicy
+        = SqsMessageDeletionPolicy.ON_SUCCESS)
     private void receiveMessage(String message) {
         LOGGER.info("NM Output message received: {}", message);
         if (!StringUtils.hasText(message)) {
@@ -26,6 +28,8 @@ public class NMOutputMessageReceiver {
         Integer serviceTypeId = messageObject.optInt("serviceTypeId");
         Integer serviceId = messageObject.optInt("serviceId");
         boolean eligible = messageObject.optBoolean("eligible");
-        LOGGER.info("NM Output message processed for patient: {}, policy: {}, serviceType: {}, service: {}, eligible: {}", patientId, policyId, serviceTypeId, serviceId, eligible);
+        LOGGER.info("NM Output message processed for patient: {}, policy: {}," +
+            " serviceType: {}, service: {}, eligible: {}", patientId,
+            policyId, serviceTypeId, serviceId, eligible);
     }
 }

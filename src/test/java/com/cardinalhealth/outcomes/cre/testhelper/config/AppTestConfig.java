@@ -14,11 +14,12 @@ public class AppTestConfig {
 
     @Bean
     public SimpleMessageListenerContainer simpleMessageListenerContainer() {
-        SimpleMessageListenerContainerFactory factory = new SimpleMessageListenerContainerFactory();
+        SimpleMessageListenerContainerFactory factory =
+            new SimpleMessageListenerContainerFactory();
         factory.setAutoStartup(false);
         factory.setAmazonSqs(amazonSQSAsync());
         SimpleMessageListenerContainer simpleMessageListenerContainer = factory
-                .createSimpleMessageListenerContainer();
+            .createSimpleMessageListenerContainer();
         simpleMessageListenerContainer.setMessageHandler(messageHandler());
         return simpleMessageListenerContainer;
     }

@@ -18,7 +18,8 @@ import java.util.Map;
 
 @RestController
 public class TestHelperController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TestHelperController.class);
+    private static final Logger LOGGER =
+        LoggerFactory.getLogger(TestHelperController.class);
     @Autowired
     private PRMessageSender prMessageSender;
 
@@ -31,10 +32,12 @@ public class TestHelperController {
     public Map<String, Object> fakePriorServiceData(String patientId) {
         String data = "{}";
         try {
-            Resource resource = new ClassPathResource(String.format("static/%s_FakePriorServiceData.json", patientId));
+            Resource resource = new ClassPathResource(String.format("static" +
+                "/%s_FakePriorServiceData.json", patientId));
             data = Files.readString(Path.of(resource.getURL().getPath()));
         } catch (IOException e) {
-            String errorMessage = String.format("error reading fake prior service data for %s", patientId);
+            String errorMessage = String.format("error reading fake prior " +
+                "service data for %s", patientId);
             LOGGER.error(errorMessage);
         }
         return new JSONObject(data).toMap();
