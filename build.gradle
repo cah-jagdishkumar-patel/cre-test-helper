@@ -31,7 +31,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'io.awspring.cloud:spring-cloud-starter-aws-messaging'
+    implementation 'io.awspring.cloud:spring-cloud-aws-starter-sqs'
     implementation 'org.json:json:20220924'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -43,7 +43,7 @@ dependencies {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.awspring.cloud:spring-cloud-aws-dependencies:2.4.3'
+        mavenBom 'io.awspring.cloud:spring-cloud-aws-dependencies:3.0.0-RC1'
     }
 }
 

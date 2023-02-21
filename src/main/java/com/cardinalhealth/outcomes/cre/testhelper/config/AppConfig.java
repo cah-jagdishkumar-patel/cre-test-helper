@@ -1,12 +1,7 @@
 package com.cardinalhealth.outcomes.cre.testhelper.config;
 
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.client.builder.AwsClientBuilder;
-import com.amazonaws.services.sqs.AmazonSQSAsync;
-import com.amazonaws.services.sqs.AmazonSQSAsyncClientBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.awspring.cloud.messaging.core.QueueMessagingTemplate;
+import io.awspring.cloud.sqs.operations.SqsTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,35 +9,49 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.converter.MessageConverter;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.sqs.SqsAsyncClient;
+
+import java.net.URI;
 
 @Configuration
 public class AppConfig {
 
-    @Value("${cloud.aws.region.static}")
+    @Value("${spring.cloud.aws.region.static}")
     private String region;
 
-    @Value("${cloud.aws.credentials.access-key}")
+    @Value("${spring.cloud.aws.credentials.access-key}")
     private String accessKeyId;
 
-    @Value("${cloud.aws.credentials.secret-key}")
+    @Value("${spring.cloud.aws.credentials.secret-key}")
     private String secretAccessKey;
 
-    @Value("${cloud.aws.queue.uri}")
+    @Value("${spring.cloud.aws.sqs.endpoint}")
     private String sqsUrl;
 
     @Profile("!test")
     @Bean
     @Primary
-    public AmazonSQSAsync amazonSQSAsync() {
-        return AmazonSQSAsyncClientBuilder.standard()
-            .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(sqsUrl, region))
-            .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessKeyId, secretAccessKey)))
+    public SqsAsyncClient sqsAsync() {
+        return  SqsAsyncClient.builder()
+            .endpointOverride(URI.create(sqsUrl))
+            .region(Region.of(region))
+            .credentialsProvider(StaticCredentialsProvider
+                .create(AwsBasicCredentials.create(accessKeyId, secretAccessKey)))
             .build();
     }
 
     @Bean
-    public QueueMessagingTemplate queueMessagingTemplate() {
-        return new QueueMessagingTemplate(amazonSQSAsync());
+    public SqsTemplate sqsTemplate() {
+        return SqsTemplate
+            .builder()
+            .sqsAsyncClient(sqsAsync())
+            .configureDefaultConverter(converter ->
+                converter.setPayloadMessageConverter(
+                    messageConverter(objectMapper())))
+            .build();
     }
 
     @Bean

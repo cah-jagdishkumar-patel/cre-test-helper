@@ -1,6 +1,6 @@
 package com.cardinalhealth.outcomes.cre.testhelper.sqs.sender;
 
-import io.awspring.cloud.messaging.core.QueueMessagingTemplate;
+import io.awspring.cloud.sqs.operations.SqsTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +13,11 @@ public class PRMessageSender {
     private static final Logger LOGGER =
         LoggerFactory.getLogger(PRMessageSender.class);
 
-    @Value("${cloud.aws.queue.pr.input.name}")
+    @Value("${spring.cloud.aws.sqs.pr.input.name}")
     private String prQueueName;
 
     @Autowired
-    private QueueMessagingTemplate queueMessagingTemplate;
+    private SqsTemplate sqsTemplate;
 
     public void sendMessage(String message) {
         if (!StringUtils.hasText(message)) {
@@ -25,7 +25,7 @@ public class PRMessageSender {
             LOGGER.error(errorMessage);
             throw new RuntimeException(errorMessage);
         }
-        queueMessagingTemplate.convertAndSend(prQueueName, message);
+        sqsTemplate.send(prQueueName, message);
         LOGGER.info("PR message sent to queue: {}", prQueueName);
     }
 }

@@ -1,7 +1,6 @@
 package com.cardinalhealth.outcomes.cre.testhelper.sqs.receiver;
 
-import io.awspring.cloud.messaging.listener.SqsMessageDeletionPolicy;
-import io.awspring.cloud.messaging.listener.annotation.SqsListener;
+import io.awspring.cloud.sqs.annotation.SqsListener;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +12,7 @@ public class NMOutputMessageReceiver {
     private static final Logger LOGGER =
         LoggerFactory.getLogger(NMOutputMessageReceiver.class);
 
-    @SqsListener(value = "${cloud.aws.queue.nm.output.name}", deletionPolicy
-        = SqsMessageDeletionPolicy.ON_SUCCESS)
+    @SqsListener(value = "${spring.cloud.aws.sqs.nm.output.name}")
     private void receiveMessage(String message) {
         LOGGER.info("NM Output message received: {}", message);
         if (!StringUtils.hasText(message)) {
