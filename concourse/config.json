@@ -24,7 +24,6 @@
   "makeDocumentation": false,
   "veracodeScanPRs": false,
   "deploySecrets": {
-    "ACTIVE_PROFILE": "cre-test-helper.{env}-active-profile",
     "AWS_ACCESS_KEY": "cre-test-helper.{env}-aws-access-key",
     "AWS_SECRET_KEY": "cre-test-helper.{env}-aws-secret-key"
   },

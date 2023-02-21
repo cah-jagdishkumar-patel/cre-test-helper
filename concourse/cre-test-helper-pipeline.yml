@@ -231,7 +231,7 @@ jobs:
         outputs:
         - name: environment
       params:
-        ENV_VARS: DEPLOY_ACTIVE_PROFILE=((cre-test-helper.fluffle-active-profile)),DEPLOY_AWS_ACCESS_KEY=((cre-test-helper.fluffle-aws-access-key)),DEPLOY_AWS_SECRET_KEY=((cre-test-helper.fluffle-aws-secret-key))
+        ENV_VARS: DEPLOY_AWS_ACCESS_KEY=((cre-test-helper.fluffle-aws-access-key)),DEPLOY_AWS_SECRET_KEY=((cre-test-helper.fluffle-aws-secret-key))
     - task: deploy
       config:
         platform: linux
@@ -346,7 +346,7 @@ jobs:
         outputs:
         - name: environment
       params:
-        ENV_VARS: DEPLOY_ACTIVE_PROFILE=((cre-test-helper.stage-active-profile)),DEPLOY_AWS_ACCESS_KEY=((cre-test-helper.stage-aws-access-key)),DEPLOY_AWS_SECRET_KEY=((cre-test-helper.stage-aws-secret-key))
+        ENV_VARS: DEPLOY_AWS_ACCESS_KEY=((cre-test-helper.stage-aws-access-key)),DEPLOY_AWS_SECRET_KEY=((cre-test-helper.stage-aws-secret-key))
     - task: deploy
       config:
         platform: linux
@@ -465,7 +465,7 @@ jobs:
         outputs:
         - name: environment
       params:
-        ENV_VARS: DEPLOY_ACTIVE_PROFILE=((cre-test-helper.stage-phi-active-profile)),DEPLOY_AWS_ACCESS_KEY=((cre-test-helper.stage-phi-aws-access-key)),DEPLOY_AWS_SECRET_KEY=((cre-test-helper.stage-phi-aws-secret-key))
+        ENV_VARS: DEPLOY_AWS_ACCESS_KEY=((cre-test-helper.stage-phi-aws-access-key)),DEPLOY_AWS_SECRET_KEY=((cre-test-helper.stage-phi-aws-secret-key))
     - task: deploy
       config:
         platform: linux
@@ -584,7 +584,7 @@ jobs:
         outputs:
         - name: environment
       params:
-        ENV_VARS: DEPLOY_ACTIVE_PROFILE=((cre-test-helper.prod-active-profile)),DEPLOY_AWS_ACCESS_KEY=((cre-test-helper.prod-aws-access-key)),DEPLOY_AWS_SECRET_KEY=((cre-test-helper.prod-aws-secret-key))
+        ENV_VARS: DEPLOY_AWS_ACCESS_KEY=((cre-test-helper.prod-aws-access-key)),DEPLOY_AWS_SECRET_KEY=((cre-test-helper.prod-aws-secret-key))
     - task: deploy
       config:
         platform: linux
