@@ -15,14 +15,19 @@
   "gradleIntegrationTests": true,
   "deployable": true,
   "deployToEnvs": [
-    "stage"
+    "stage",
+    "stage-phi",
+    "fluffle",
+    "prod"
   ],
   "sureFireReports": false,
   "makeDocumentation": false,
   "veracodeScanPRs": false,
-  "services": [
-    "cre-test-helper-creds"
-  ],
+  "deploySecrets": {
+    "ACTIVE_PROFILE": "cre-test-helper.{env}-active-profile",
+    "AWS_ACCESS_KEY": "cre-test-helper.{env}-aws-access-key",
+    "AWS_SECRET_KEY": "cre-test-helper.{env}-aws-secret-key"
+  },
   "cf": {
     "stage": {
       "instances": 1,
