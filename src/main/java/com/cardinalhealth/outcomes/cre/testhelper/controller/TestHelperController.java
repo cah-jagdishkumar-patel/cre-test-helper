@@ -1,6 +1,7 @@
 package com.cardinalhealth.outcomes.cre.testhelper.controller;
 
 import com.cardinalhealth.outcomes.cre.testhelper.sqs.sender.PRMessageSender;
+import com.cardinalhealth.outcomes.cre.testhelper.model.PatientRepoMessage;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +25,8 @@ public class TestHelperController {
     private PRMessageSender prMessageSender;
 
     @PostMapping("/sendPRMessage")
-    public void sendPRMessage(@RequestBody String message) {
-        prMessageSender.sendMessage(message);
+    public void sendPRMessage(@RequestBody PatientRepoMessage patientRepoMessage) {
+        prMessageSender.sendMessage(patientRepoMessage);
     }
 
     @PostMapping("/fakePriorServiceData")

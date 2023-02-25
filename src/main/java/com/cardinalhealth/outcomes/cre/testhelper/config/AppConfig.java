@@ -47,6 +47,10 @@ public class AppConfig {
         return SqsTemplate
             .builder()
             .sqsAsyncClient(sqsAsync())
+            .configureDefaultConverter(converter -> {
+                converter.setObjectMapper(objectMapper());
+                converter.setPayloadTypeHeader("json");
+            })
             .build();
     }
 
@@ -56,7 +60,7 @@ public class AppConfig {
     }
 
     @Bean
-    SqsListenerConfigurer sqsListenerConfigurer(ObjectMapper objectMapper) {
-        return registrar -> registrar.setObjectMapper(objectMapper);
+    SqsListenerConfigurer sqsListenerConfigurer() {
+        return registrar -> registrar.setObjectMapper(objectMapper());
     }
 }

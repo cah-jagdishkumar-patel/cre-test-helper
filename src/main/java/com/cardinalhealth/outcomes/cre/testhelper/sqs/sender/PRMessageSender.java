@@ -1,12 +1,12 @@
 package com.cardinalhealth.outcomes.cre.testhelper.sqs.sender;
 
+import com.cardinalhealth.outcomes.cre.testhelper.model.PatientRepoMessage;
 import io.awspring.cloud.sqs.operations.SqsTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 @Service
 public class PRMessageSender {
@@ -19,13 +19,13 @@ public class PRMessageSender {
     @Autowired
     private SqsTemplate sqsTemplate;
 
-    public void sendMessage(String message) {
-        if (!StringUtils.hasText(message)) {
+    public void sendMessage(PatientRepoMessage patientRepoMessage) {
+        if (patientRepoMessage == null) {
             final String errorMessage = "empty message";
             LOGGER.error(errorMessage);
             throw new RuntimeException(errorMessage);
         }
-        sqsTemplate.send(prQueueName, message);
+        sqsTemplate.send(prQueueName, patientRepoMessage);
         LOGGER.info("PR message sent to queue: {}", prQueueName);
     }
 }
