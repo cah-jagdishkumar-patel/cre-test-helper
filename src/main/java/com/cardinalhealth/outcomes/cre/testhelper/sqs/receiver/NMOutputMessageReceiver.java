@@ -13,7 +13,7 @@ public class NMOutputMessageReceiver {
         LoggerFactory.getLogger(NMOutputMessageReceiver.class);
 
     @SqsListener(value = "${spring.cloud.aws.sqs.nm.output.name}")
-    private void receiveMessage(String message) {
+    public void receiveMessage(String message) {
         LOGGER.info("NM Output message received: {}", message);
         if (!StringUtils.hasText(message)) {
             final String errorMessage = "received empty SE Data Ready message";
