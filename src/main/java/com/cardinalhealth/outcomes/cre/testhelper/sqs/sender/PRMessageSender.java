@@ -26,6 +26,6 @@ public class PRMessageSender {
             throw new RuntimeException(errorMessage);
         }
         sqsTemplate.send(prQueueName, patientRepoMessage);
-        LOGGER.info("PR message sent to queue: {}", prQueueName);
+        LOGGER.info("PR message: {} sent to queue: {}", patientRepoMessage, prQueueName);
     }
 }
