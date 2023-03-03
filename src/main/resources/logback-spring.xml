@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <springProfile name="cloud,stage,stage-phi,prod">
+        <appender name="R" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                <customFields>{"environment": "${ENVIRONMENT}", "application":"cre-test-helper", "logtype":"cre-test-helper"}
+                </customFields>
+                <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter"/>
+            </encoder>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="R"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="local">
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="STDOUT" />
+        </root>
+    </springProfile>
+
+    <springProfile name="test">
+        <appender name="R" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        </appender>
+
+        <root level="INFO">
+            <appender-ref ref="R"/>
+        </root>
+    </springProfile>
+</configuration>
