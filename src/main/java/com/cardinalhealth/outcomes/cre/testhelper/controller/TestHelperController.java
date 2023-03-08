@@ -8,9 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -48,4 +46,28 @@ public class TestHelperController {
     public String fakeServiceData(String patientId, String valueList) {
         return "0.5";
     }
+
+    @PostMapping("/programs")
+    public String programs(Map<String,Object> input) {
+        return "{ \"id\" : \"programs/123\"}";
+    }
+
+    @PutMapping("/programs/{programId}/status")
+    public void status(@PathVariable String programId, Map<String,Object> status) {
+
+    }
+
+    @PostMapping("/programs/{programId}/rulesets")
+    public void rulesets(@PathVariable String programId, Map<String,Object> input) {
+    }
+
+    @PostMapping("/clients")
+    public String clients(Map<String,Object> input) {
+        return "{ \"id\" : \"clients/123\"}";
+    }
+
+    @PostMapping("/clients/{clientId}/programs")
+    public void clientProgram(@PathVariable String clientId, Map<String,Object> input) {
+    }
+
 }
