@@ -15,7 +15,7 @@ public class Patient {
 
     private String uuid;
     private Long connectPatientId;
-    private Long policyId;
+    private Integer policyId;
     private String outcomesTermDate;
     private String mtmTermDate;
     private String planTermDate;
