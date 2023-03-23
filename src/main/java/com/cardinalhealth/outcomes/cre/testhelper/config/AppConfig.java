@@ -43,24 +43,19 @@ public class AppConfig {
     }
 
     @Bean
-    public SqsTemplate sqsTemplate() {
+    public SqsTemplate sqsTemplate(ObjectMapper objectMapper) {
         return SqsTemplate
             .builder()
             .sqsAsyncClient(sqsAsync())
             .configureDefaultConverter(converter -> {
-                converter.setObjectMapper(objectMapper());
+                converter.setObjectMapper(objectMapper);
                 converter.setPayloadTypeHeader("json");
             })
             .build();
     }
 
     @Bean
-    public ObjectMapper objectMapper() {
-        return new ObjectMapper();
-    }
-
-    @Bean
-    SqsListenerConfigurer sqsListenerConfigurer() {
-        return registrar -> registrar.setObjectMapper(objectMapper());
+    SqsListenerConfigurer sqsListenerConfigurer(ObjectMapper objectMapper) {
+        return registrar -> registrar.setObjectMapper(objectMapper);
     }
 }
