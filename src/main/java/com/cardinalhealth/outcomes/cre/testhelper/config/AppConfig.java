@@ -34,15 +34,25 @@ public class AppConfig {
     @Bean
     @Primary
     public SqsAsyncClient sqsAsync() {
-        return  SqsAsyncClient.builder()
+        return SqsAsyncClient.builder()
             .endpointOverride(URI.create(sqsUrl))
             .region(Region.of(region))
             .credentialsProvider(StaticCredentialsProvider
-                .create(AwsBasicCredentials.create(accessKeyId, secretAccessKey)))
+                .create(AwsBasicCredentials.create(accessKeyId,
+                    secretAccessKey)))
             .build();
     }
 
+    @Profile("!test")
     @Bean
+    @Primary
+    SqsListenerConfigurer sqsListenerConfigurer(ObjectMapper objectMapper) {
+        return registrar -> registrar.setObjectMapper(objectMapper);
+    }
+
+    @Profile("!test")
+    @Bean
+    @Primary
     public SqsTemplate sqsTemplate(ObjectMapper objectMapper) {
         return SqsTemplate
             .builder()
@@ -52,10 +62,5 @@ public class AppConfig {
                 converter.setPayloadTypeHeader("json");
             })
             .build();
-    }
-
-    @Bean
-    SqsListenerConfigurer sqsListenerConfigurer(ObjectMapper objectMapper) {
-        return registrar -> registrar.setObjectMapper(objectMapper);
     }
 }
