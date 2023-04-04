@@ -1,36 +1,89 @@
 {
-  "name": "cre-test-helper",
-  "repo": "cahcommercial/cre-test-helper",
-  "groupId": "com.cardinalhealth.outcomes.cre",
-  "mainBranch": "main",
-  "concourseTeam": "strikers",
-  "needsConnect": false,
-  "needsDB": false,
-  "needsConnectDb": false,
-  "dbType": "",
-  "hasFlyway": false,
-  "pcfOrganization": "clinical-rules-engine",
-  "type": "java",
-  "gradleBuild": true,
-  "gradleIntegrationTests": true,
-  "deployable": true,
-  "deployToEnvs": [
-    "stage",
-    "stage-phi",
-    "fluffle",
-    "prod"
-  ],
-  "sureFireReports": false,
-  "makeDocumentation": false,
-  "veracodeScanPRs": false,
-  "deploySecrets": {
-    "AWS_ACCESS_KEY": "cre-test-helper.{env}-aws-access-key",
-    "AWS_SECRET_KEY": "cre-test-helper.{env}-aws-secret-key"
-  },
-  "cf": {
-    "stage": {
-      "instances": 1,
-      "memory": "4g"
-    }
-  }
+    "name": "cre-test-helper",
+    "concourseTeam": "strikers",
+    "pcfOrganization": "clinical-rules-engine",
+    "groupId": "com.cardinalhealth.outcomes.cre",
+    "language": "java",
+    "repo": "cahcommercial/cre-test-helper",
+    "deployable": true,
+    "promotable": true,
+    "deployToS3": false,
+    "deployToEnvs": [
+        "stage",
+        "stage-phi",
+        "fluffle",
+        "prod"
+    ],
+    "cf": {
+        "stage": {
+            "url": null,
+            "host": null,
+            "internalHost": null,
+            "instances": 1,
+            "memory": "4g",
+            "username": null,
+            "password": null,
+            "maxDirectMemory": null
+        }
+    },
+    "dbType": "",
+    "flywayConfig": {
+    },
+    "flywaySecrets": {
+    },
+    "buildConfig": {
+    },
+    "buildSecrets": {
+    },
+    "deployConfig": {
+    },
+    "deploySecrets": {
+        "AWS_ACCESS_KEY": "cre-test-helper.{env}-aws-access-key",
+        "AWS_SECRET_KEY": "cre-test-helper.{env}-aws-secret-key"
+    },
+    "gradleBuild": true,
+    "gradleIntegrationTests": true,
+    "hasFlyway": false,
+    "hasPactVerify": false,
+    "preventDeployIfPactsFail": false,
+    "isPactConsumer": false,
+    "isPactProvider": false,
+    "pactConsumers": [
+    ],
+    "mainBranch": "main",
+    "sourcePath": "./source",
+    "versionBranch": "version",
+    "makeDocumentation": false,
+    "packageExtension": "jar",
+    "s3DeployPath": null,
+    "s3SyncFolder": "static",
+    "services": [
+    ],
+    "veracodeScanPRs": false,
+    "healthCheck": false,
+    "prodNotify": false,
+    "openRouteToInternet": true,
+    "slack": {
+        "channel": "#gpj-deploys"
+    },
+    "prodSlack": {
+        "channel": "#connect-deployment"
+    },
+    "routeOverrides": [
+    ],
+    "apmLogLevel": "info",
+    "dailyBuild": true,
+    "addPcfFlywayJobs": false,
+    "cypress": false,
+    "deprecated": {
+        "addKafkaTopics": false,
+        "createPCFDatabase": false,
+        "needsConnectDb": false,
+        "needsDB": false,
+        "needsLegacyDb": false,
+        "needsPgJobs": false,
+        "sureFireReports": false,
+        "needsConnect": false
+    },
+    "configType": "AppConfig"
 }

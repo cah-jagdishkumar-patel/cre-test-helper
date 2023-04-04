@@ -67,7 +67,7 @@ resources:
 - name: tools
   type: git
   version:
-    ref: 84799ce4e341fe820297c11fe47698c24854ee4f
+    ref: e2955ea18f813b68cfbb2f59889ed391d663e78d
   icon: git
   check_every: 5m
   source:
@@ -168,17 +168,16 @@ jobs:
             <<: *artifacts-creds
         run:
           path: echo
-          args:  [ Generated using https://github.com/cahcommercial/outcomes-pipeline-tools commit 84799ce4e341fe820297c11fe47698c24854ee4f ]
+          args:  [ Generated using https://github.com/cahcommercial/outcomes-pipeline-tools commit e2955ea18f813b68cfbb2f59889ed391d663e78d ]
 - name: deploy-to-fluffle
   plan:
-    - get: source
+    - get: nexus-snapshot
       trigger: true
       passed: [main-build]
     - get: week-day-morning
       trigger: true
     - get: tools
     - get: version-fluffle
-      trigger: true
     - task: nexus_download
       config:
         platform: linux
@@ -212,27 +211,8 @@ jobs:
         version: version-fluffle
       output_mapping:
         target: target
-    - task: parse_env_vars
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source:
-            tag: latest
-            username: ((artifacts.username))
-            password: ((artifacts.password))
-            repository: artifacts.cahcommtech.com/pipeline-tools17
-        params:
-          ENV_VARS:
-        run:
-          path: tools/tasks/dynav.sh
-        inputs:
-        - name: tools
-        outputs:
-        - name: environment
-      params:
-        ENV_VARS: DEPLOY_AWS_ACCESS_KEY=((cre-test-helper.fluffle-aws-access-key)),DEPLOY_AWS_SECRET_KEY=((cre-test-helper.fluffle-aws-secret-key))
     - task: deploy
+      tags: [deploy]
       config:
         platform: linux
         image_resource:
@@ -258,6 +238,9 @@ jobs:
           ADD_HEALTHCHECK:
           NAME:
           APM_LOG_LEVEL:
+          ROUTES: cre-test-helper-fluffle.apps.internal,cre-test-helper-fluffle.apps.np1.fuseapps.io
+          DEPLOY_AWS_ACCESS_KEY: ((cre-test-helper.fluffle-aws-access-key))
+          DEPLOY_AWS_SECRET_KEY: ((cre-test-helper.fluffle-aws-secret-key))
         run:
           path: tools/tasks/deploy.sh
         inputs:
@@ -278,6 +261,7 @@ jobs:
         CF_SPACE: fluffle
         CF_INSTANCES: 1
         CF_MEMORY: 1G
+        CF_MAX_DIRECT_MEMORY: 10M
         CF_SERVICES:
         ADD_HEALTHCHECK: false
         NAME: cre-test-helper
@@ -327,27 +311,8 @@ jobs:
         version: version-stage
       output_mapping:
         target: target
-    - task: parse_env_vars
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source:
-            tag: latest
-            username: ((artifacts.username))
-            password: ((artifacts.password))
-            repository: artifacts.cahcommtech.com/pipeline-tools17
-        params:
-          ENV_VARS:
-        run:
-          path: tools/tasks/dynav.sh
-        inputs:
-        - name: tools
-        outputs:
-        - name: environment
-      params:
-        ENV_VARS: DEPLOY_AWS_ACCESS_KEY=((cre-test-helper.stage-aws-access-key)),DEPLOY_AWS_SECRET_KEY=((cre-test-helper.stage-aws-secret-key))
     - task: deploy
+      tags: [deploy]
       config:
         platform: linux
         image_resource:
@@ -373,6 +338,9 @@ jobs:
           ADD_HEALTHCHECK:
           NAME:
           APM_LOG_LEVEL:
+          ROUTES: cre-test-helper-stage.apps.internal,cre-test-helper-stage.apps.np1.fuseapps.io
+          DEPLOY_AWS_ACCESS_KEY: ((cre-test-helper.stage-aws-access-key))
+          DEPLOY_AWS_SECRET_KEY: ((cre-test-helper.stage-aws-secret-key))
         run:
           path: tools/tasks/deploy.sh
         inputs:
@@ -393,6 +361,7 @@ jobs:
         CF_SPACE: stage
         CF_INSTANCES: 1
         CF_MEMORY: 4g
+        CF_MAX_DIRECT_MEMORY: 10M
         CF_SERVICES:
         ADD_HEALTHCHECK: false
         NAME: cre-test-helper
@@ -446,27 +415,8 @@ jobs:
         version: version-stage-phi
       output_mapping:
         target: target
-    - task: parse_env_vars
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source:
-            tag: latest
-            username: ((artifacts.username))
-            password: ((artifacts.password))
-            repository: artifacts.cahcommtech.com/pipeline-tools17
-        params:
-          ENV_VARS:
-        run:
-          path: tools/tasks/dynav.sh
-        inputs:
-        - name: tools
-        outputs:
-        - name: environment
-      params:
-        ENV_VARS: DEPLOY_AWS_ACCESS_KEY=((cre-test-helper.stage-phi-aws-access-key)),DEPLOY_AWS_SECRET_KEY=((cre-test-helper.stage-phi-aws-secret-key))
     - task: deploy
+      tags: [deploy]
       config:
         platform: linux
         image_resource:
@@ -492,6 +442,9 @@ jobs:
           ADD_HEALTHCHECK:
           NAME:
           APM_LOG_LEVEL:
+          ROUTES: cre-test-helper-stage-phi.apps.internal,cre-test-helper-stage-phi.apps.fuseapps.io
+          DEPLOY_AWS_ACCESS_KEY: ((cre-test-helper.stage-phi-aws-access-key))
+          DEPLOY_AWS_SECRET_KEY: ((cre-test-helper.stage-phi-aws-secret-key))
         run:
           path: tools/tasks/deploy.sh
         inputs:
@@ -512,6 +465,7 @@ jobs:
         CF_SPACE: stage-phi
         CF_INSTANCES: 2
         CF_MEMORY: 1G
+        CF_MAX_DIRECT_MEMORY: 10M
         CF_SERVICES:
         ADD_HEALTHCHECK: false
         NAME: cre-test-helper
@@ -565,27 +519,8 @@ jobs:
         version: version-prod
       output_mapping:
         target: target
-    - task: parse_env_vars
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source:
-            tag: latest
-            username: ((artifacts.username))
-            password: ((artifacts.password))
-            repository: artifacts.cahcommtech.com/pipeline-tools17
-        params:
-          ENV_VARS:
-        run:
-          path: tools/tasks/dynav.sh
-        inputs:
-        - name: tools
-        outputs:
-        - name: environment
-      params:
-        ENV_VARS: DEPLOY_AWS_ACCESS_KEY=((cre-test-helper.prod-aws-access-key)),DEPLOY_AWS_SECRET_KEY=((cre-test-helper.prod-aws-secret-key))
     - task: deploy
+      tags: [deploy]
       config:
         platform: linux
         image_resource:
@@ -611,6 +546,9 @@ jobs:
           ADD_HEALTHCHECK:
           NAME:
           APM_LOG_LEVEL:
+          ROUTES: cre-test-helper-production.apps.internal,cre-test-helper-production.apps.fuseapps.io
+          DEPLOY_AWS_ACCESS_KEY: ((cre-test-helper.prod-aws-access-key))
+          DEPLOY_AWS_SECRET_KEY: ((cre-test-helper.prod-aws-secret-key))
         run:
           path: tools/tasks/deploy.sh
         inputs:
@@ -631,6 +569,7 @@ jobs:
         CF_SPACE: prod
         CF_INSTANCES: 2
         CF_MEMORY: 1G
+        CF_MAX_DIRECT_MEMORY: 10M
         CF_SERVICES:
         ADD_HEALTHCHECK: false
         NAME: cre-test-helper
@@ -773,6 +712,7 @@ jobs:
           GIT_USERNAME:
           GIT_PASSWORD:
           GIT_REGISTRY_TOKEN:
+          SOURCE_PATH:
           NEXUS_USERNAME: ((artifacts.username))
           NEXUS_PASSWORD: ((artifacts.password))
         run:
@@ -803,6 +743,7 @@ jobs:
         GIT_PASSWORD: ((github.password))
         GIT_REGISTRY_TOKEN: ((concourse-github-access-token))
         ADD_CYPRESS: false
+        SOURCE_PATH: ./source
       on_failure:
         put: slack-alert
         params:
@@ -822,6 +763,7 @@ jobs:
           BUILD_TYPE:
           VERSION_FILE:
           PUBLISH_CONSUMER_PACTS:
+          SOURCE_PATH:
         run:
           path: tools/tasks/publish.sh
         inputs:
@@ -837,6 +779,7 @@ jobs:
         BUILD_TYPE: java
         VERSION_FILE: snapshot
         PUBLISH_CONSUMER_PACTS: false
+        SOURCE_PATH: ./source
       input_mapping:
         package: package
       output_mapping:
@@ -891,6 +834,7 @@ jobs:
           GIT_USERNAME:
           GIT_PASSWORD:
           GIT_REGISTRY_TOKEN:
+          SOURCE_PATH:
           NEXUS_USERNAME: ((artifacts.username))
           NEXUS_PASSWORD: ((artifacts.password))
         run:
@@ -920,6 +864,7 @@ jobs:
         GIT_PASSWORD: ((github.password))
         GIT_REGISTRY_TOKEN: ((concourse-github-access-token))
         ADD_CYPRESS: false
+        SOURCE_PATH: ./source
       on_failure:
         put: pr
         params:
