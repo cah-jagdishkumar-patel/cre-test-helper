@@ -262,7 +262,7 @@ jobs:
         CF_INSTANCES: 1
         CF_MEMORY: 1G
         CF_MAX_DIRECT_MEMORY: 10M
-        CF_SERVICES:
+        CF_SERVICES: elastic-apm
         ADD_HEALTHCHECK: false
         NAME: cre-test-helper
         APM_LOG_LEVEL: info
@@ -362,7 +362,7 @@ jobs:
         CF_INSTANCES: 1
         CF_MEMORY: 4g
         CF_MAX_DIRECT_MEMORY: 10M
-        CF_SERVICES:
+        CF_SERVICES: elastic-apm
         ADD_HEALTHCHECK: false
         NAME: cre-test-helper
         APM_LOG_LEVEL: info
@@ -466,7 +466,7 @@ jobs:
         CF_INSTANCES: 2
         CF_MEMORY: 1G
         CF_MAX_DIRECT_MEMORY: 10M
-        CF_SERVICES:
+        CF_SERVICES: elastic-apm
         ADD_HEALTHCHECK: false
         NAME: cre-test-helper
         APM_LOG_LEVEL: info
@@ -570,7 +570,7 @@ jobs:
         CF_INSTANCES: 2
         CF_MEMORY: 1G
         CF_MAX_DIRECT_MEMORY: 10M
-        CF_SERVICES:
+        CF_SERVICES: elastic-apm
         ADD_HEALTHCHECK: false
         NAME: cre-test-helper
         APM_LOG_LEVEL: info

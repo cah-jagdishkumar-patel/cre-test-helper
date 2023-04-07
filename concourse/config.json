@@ -58,6 +58,7 @@
     "s3DeployPath": null,
     "s3SyncFolder": "static",
     "services": [
+        "elastic-apm"
     ],
     "veracodeScanPRs": false,
     "healthCheck": false,
