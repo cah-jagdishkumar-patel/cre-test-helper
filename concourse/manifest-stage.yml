@@ -10,6 +10,9 @@ applications:
       - route: cre-test-helper-stage.apps.np1.fuseapps.io
     env:
       JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+}}'
-      ENVIRONMENT: stage
-      SPRING_PROFILES_ACTIVE: stage
+      ENVIRONMENT: ((ACTIVE_PROFILE))
+      SPRING_PROFILES_ACTIVE: ((ACTIVE_PROFILE))
       LOGGING_LEVEL_ROOT: INFO
+      ACTIVE_PROFILE: ((ACTIVE_PROFILE))
+      AWS_ACCESS_KEY: ((AWS_ACCESS_KEY))
+      AWS_SECRET_KEY: ((AWS_SECRET_KEY))
