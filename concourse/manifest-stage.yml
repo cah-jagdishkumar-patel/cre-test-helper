@@ -9,7 +9,7 @@ applications:
     routes:
       - route: cre-test-helper-stage.apps.np1.fuseapps.io
     env:
-      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+}}'
+      JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+}}'
       ENVIRONMENT: stage
       SPRING_PROFILES_ACTIVE: stage
       LOGGING_LEVEL_ROOT: INFO
