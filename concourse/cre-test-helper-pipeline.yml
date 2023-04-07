@@ -239,6 +239,7 @@ jobs:
           NAME:
           APM_LOG_LEVEL:
           ROUTES: cre-test-helper-fluffle.apps.internal,cre-test-helper-fluffle.apps.np1.fuseapps.io
+          DEPLOY_ACTIVE_PROFILE: ((cre-test-helper.fluffle-active-profile))
           DEPLOY_AWS_ACCESS_KEY: ((cre-test-helper.fluffle-aws-access-key))
           DEPLOY_AWS_SECRET_KEY: ((cre-test-helper.fluffle-aws-secret-key))
         run:
@@ -339,6 +340,7 @@ jobs:
           NAME:
           APM_LOG_LEVEL:
           ROUTES: cre-test-helper-stage.apps.internal,cre-test-helper-stage.apps.np1.fuseapps.io
+          DEPLOY_ACTIVE_PROFILE: ((cre-test-helper.stage-active-profile))
           DEPLOY_AWS_ACCESS_KEY: ((cre-test-helper.stage-aws-access-key))
           DEPLOY_AWS_SECRET_KEY: ((cre-test-helper.stage-aws-secret-key))
         run:
@@ -443,6 +445,7 @@ jobs:
           NAME:
           APM_LOG_LEVEL:
           ROUTES: cre-test-helper-stage-phi.apps.internal,cre-test-helper-stage-phi.apps.fuseapps.io
+          DEPLOY_ACTIVE_PROFILE: ((cre-test-helper.stage-phi-active-profile))
           DEPLOY_AWS_ACCESS_KEY: ((cre-test-helper.stage-phi-aws-access-key))
           DEPLOY_AWS_SECRET_KEY: ((cre-test-helper.stage-phi-aws-secret-key))
         run:
@@ -547,6 +550,7 @@ jobs:
           NAME:
           APM_LOG_LEVEL:
           ROUTES: cre-test-helper-production.apps.internal,cre-test-helper-production.apps.fuseapps.io
+          DEPLOY_ACTIVE_PROFILE: ((cre-test-helper.prod-active-profile))
           DEPLOY_AWS_ACCESS_KEY: ((cre-test-helper.prod-aws-access-key))
           DEPLOY_AWS_SECRET_KEY: ((cre-test-helper.prod-aws-secret-key))
         run:
