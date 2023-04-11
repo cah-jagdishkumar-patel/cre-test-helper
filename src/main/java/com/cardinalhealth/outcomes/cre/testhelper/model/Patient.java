@@ -14,7 +14,7 @@ import java.util.List;
 public class Patient {
 
     private String uuid;
-    private Long connectPatientId;
+    private Integer connectPatientId;
     private Integer policyId;
     private String outcomesTermDate;
     private String mtmTermDate;
