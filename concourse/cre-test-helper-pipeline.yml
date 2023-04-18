@@ -67,7 +67,7 @@ resources:
 - name: tools
   type: git
   version:
-    ref: e2955ea18f813b68cfbb2f59889ed391d663e78d
+    ref: e1a6a28a6767343da2e6fe10c93acc6011150e24
   icon: git
   check_every: 5m
   source:
@@ -168,7 +168,7 @@ jobs:
             <<: *artifacts-creds
         run:
           path: echo
-          args:  [ Generated using https://github.com/cahcommercial/outcomes-pipeline-tools commit e2955ea18f813b68cfbb2f59889ed391d663e78d ]
+          args:  [ Generated using https://github.com/cahcommercial/outcomes-pipeline-tools commit e1a6a28a6767343da2e6fe10c93acc6011150e24 ]
 - name: deploy-to-fluffle
   plan:
     - get: nexus-snapshot
@@ -189,9 +189,6 @@ jobs:
             password: ((artifacts.password))
             repository: artifacts.cahcommtech.com/pipeline-tools17
         params:
-          VERSION_FILE:
-          NAME:
-          ARTIFACT_EXTENSION:
           GROUP_ID: com.cardinalhealth.connect
           NEXUS_USERNAME: ((artifacts.username))
           NEXUS_PASSWORD: ((artifacts.password))
@@ -223,21 +220,6 @@ jobs:
             password: ((artifacts.password))
             repository: artifacts.cahcommtech.com/pipeline-tools17
         params:
-          VERSION_FILE:
-          BUILD_TYPE:
-          CF_APIHOST:
-          CF_HOST:
-          CF_EXTERNAL_HOST:
-          CF_USERNAME:
-          CF_PASSWORD:
-          CF_ORGANIZATION:
-          CF_SPACE:
-          CF_INSTANCES:
-          CF_MEMORY:
-          CF_SERVICES:
-          ADD_HEALTHCHECK:
-          NAME:
-          APM_LOG_LEVEL:
           ROUTES: cre-test-helper-fluffle.apps.internal,cre-test-helper-fluffle.apps.np1.fuseapps.io
           DEPLOY_ACTIVE_PROFILE: ((cre-test-helper.fluffle-active-profile))
           DEPLOY_AWS_ACCESS_KEY: ((cre-test-helper.fluffle-aws-access-key))
@@ -290,9 +272,6 @@ jobs:
             password: ((artifacts.password))
             repository: artifacts.cahcommtech.com/pipeline-tools17
         params:
-          VERSION_FILE:
-          NAME:
-          ARTIFACT_EXTENSION:
           GROUP_ID: com.cardinalhealth.connect
           NEXUS_USERNAME: ((artifacts.username))
           NEXUS_PASSWORD: ((artifacts.password))
@@ -324,21 +303,6 @@ jobs:
             password: ((artifacts.password))
             repository: artifacts.cahcommtech.com/pipeline-tools17
         params:
-          VERSION_FILE:
-          BUILD_TYPE:
-          CF_APIHOST:
-          CF_HOST:
-          CF_EXTERNAL_HOST:
-          CF_USERNAME:
-          CF_PASSWORD:
-          CF_ORGANIZATION:
-          CF_SPACE:
-          CF_INSTANCES:
-          CF_MEMORY:
-          CF_SERVICES:
-          ADD_HEALTHCHECK:
-          NAME:
-          APM_LOG_LEVEL:
           ROUTES: cre-test-helper-stage.apps.internal,cre-test-helper-stage.apps.np1.fuseapps.io
           DEPLOY_ACTIVE_PROFILE: ((cre-test-helper.stage-active-profile))
           DEPLOY_AWS_ACCESS_KEY: ((cre-test-helper.stage-aws-access-key))
@@ -363,7 +327,7 @@ jobs:
         CF_SPACE: stage
         CF_INSTANCES: 1
         CF_MEMORY: 4g
-        CF_MAX_DIRECT_MEMORY: 10M
+        CF_MAX_DIRECT_MEMORY: 128M
         CF_SERVICES: elastic-apm
         ADD_HEALTHCHECK: false
         NAME: cre-test-helper
@@ -395,9 +359,6 @@ jobs:
             password: ((artifacts.password))
             repository: artifacts.cahcommtech.com/pipeline-tools17
         params:
-          VERSION_FILE:
-          NAME:
-          ARTIFACT_EXTENSION:
           GROUP_ID: com.cardinalhealth.connect
           NEXUS_USERNAME: ((artifacts.username))
           NEXUS_PASSWORD: ((artifacts.password))
@@ -429,21 +390,6 @@ jobs:
             password: ((artifacts.password))
             repository: artifacts.cahcommtech.com/pipeline-tools17
         params:
-          VERSION_FILE:
-          BUILD_TYPE:
-          CF_APIHOST:
-          CF_HOST:
-          CF_EXTERNAL_HOST:
-          CF_USERNAME:
-          CF_PASSWORD:
-          CF_ORGANIZATION:
-          CF_SPACE:
-          CF_INSTANCES:
-          CF_MEMORY:
-          CF_SERVICES:
-          ADD_HEALTHCHECK:
-          NAME:
-          APM_LOG_LEVEL:
           ROUTES: cre-test-helper-stage-phi.apps.internal,cre-test-helper-stage-phi.apps.fuseapps.io
           DEPLOY_ACTIVE_PROFILE: ((cre-test-helper.stage-phi-active-profile))
           DEPLOY_AWS_ACCESS_KEY: ((cre-test-helper.stage-phi-aws-access-key))
@@ -466,9 +412,9 @@ jobs:
         CF_PASSWORD: ((pcf-p1.password))
         CF_ORGANIZATION: clinical-rules-engine
         CF_SPACE: stage-phi
-        CF_INSTANCES: 2
-        CF_MEMORY: 1G
-        CF_MAX_DIRECT_MEMORY: 10M
+        CF_INSTANCES: 1
+        CF_MEMORY: 4g
+        CF_MAX_DIRECT_MEMORY: 128M
         CF_SERVICES: elastic-apm
         ADD_HEALTHCHECK: false
         NAME: cre-test-helper
@@ -500,9 +446,6 @@ jobs:
             password: ((artifacts.password))
             repository: artifacts.cahcommtech.com/pipeline-tools17
         params:
-          VERSION_FILE:
-          NAME:
-          ARTIFACT_EXTENSION:
           GROUP_ID: com.cardinalhealth.connect
           NEXUS_USERNAME: ((artifacts.username))
           NEXUS_PASSWORD: ((artifacts.password))
@@ -534,21 +477,6 @@ jobs:
             password: ((artifacts.password))
             repository: artifacts.cahcommtech.com/pipeline-tools17
         params:
-          VERSION_FILE:
-          BUILD_TYPE:
-          CF_APIHOST:
-          CF_HOST:
-          CF_EXTERNAL_HOST:
-          CF_USERNAME:
-          CF_PASSWORD:
-          CF_ORGANIZATION:
-          CF_SPACE:
-          CF_INSTANCES:
-          CF_MEMORY:
-          CF_SERVICES:
-          ADD_HEALTHCHECK:
-          NAME:
-          APM_LOG_LEVEL:
           ROUTES: cre-test-helper-production.apps.internal,cre-test-helper-production.apps.fuseapps.io
           DEPLOY_ACTIVE_PROFILE: ((cre-test-helper.prod-active-profile))
           DEPLOY_AWS_ACCESS_KEY: ((cre-test-helper.prod-aws-access-key))
@@ -603,11 +531,11 @@ jobs:
             password: ((artifacts.password))
             repository: artifacts.cahcommtech.com/pipeline-tools17
         params:
-          NAME:
-          ARTIFACT_EXTENSION:
-          GROUP_ID: com.cardinalhealth.connect
+          GROUP_ID: com.cardinalhealth.outcomes.cre
           NEXUS_USERNAME: ((artifacts.username))
           NEXUS_PASSWORD: ((artifacts.password))
+          NAME: cre-test-helper
+          ARTIFACT_EXTENSION: jar
         run:
           path: tools/tasks/promote.sh
         inputs:
@@ -618,10 +546,6 @@ jobs:
         caches:
         - path: source/node_modules
         - path: tools/.mvn/.m2
-      params:
-        NAME: cre-test-helper
-        ARTIFACT_EXTENSION: jar
-        GROUP_ID: com.cardinalhealth.outcomes.cre
       output_mapping:
         target: target
     - put: nexus
@@ -644,8 +568,8 @@ jobs:
             password: ((artifacts.password))
             repository: artifacts.cahcommtech.com/pipeline-tools17
         params:
-          TAG_WITH_V:
-          BASE_BRANCH: master
+          TAG_WITH_V: false
+          BASE_BRANCH: main
         run:
           path: tools/tasks/tag-release.sh
         inputs:
@@ -655,9 +579,6 @@ jobs:
         - name: target
         outputs:
         - name: tagRepo
-      params:
-        TAG_WITH_V: false
-        BASE_BRANCH: main
       output_mapping:
         tagRepo: tagRepo
     - put: source
@@ -706,17 +627,6 @@ jobs:
             password: ((artifacts.password))
             repository: artifacts.cahcommtech.com/pipeline-tools17
         params:
-          BUILD_TYPE:
-          GRADLE_BUILD:
-          GRADLE_INTEGRATION_TESTS:
-          DB_TYPE:
-          NEEDS_DB:
-          HAS_FLYWAY:
-          NEEDS_CONNECT_DB:
-          GIT_USERNAME:
-          GIT_PASSWORD:
-          GIT_REGISTRY_TOKEN:
-          SOURCE_PATH:
           NEXUS_USERNAME: ((artifacts.username))
           NEXUS_PASSWORD: ((artifacts.password))
         run:
@@ -763,11 +673,6 @@ jobs:
             username: ((artifacts.username))
             password: ((artifacts.password))
             repository: artifacts.cahcommtech.com/pipeline-tools17
-        params:
-          BUILD_TYPE:
-          VERSION_FILE:
-          PUBLISH_CONSUMER_PACTS:
-          SOURCE_PATH:
         run:
           path: tools/tasks/publish.sh
         inputs:
@@ -828,17 +733,6 @@ jobs:
             password: ((artifacts.password))
             repository: artifacts.cahcommtech.com/pipeline-tools17
         params:
-          BUILD_TYPE:
-          GRADLE_BUILD:
-          GRADLE_INTEGRATION_TESTS:
-          DB_TYPE:
-          NEEDS_DB:
-          HAS_FLYWAY:
-          NEEDS_CONNECT_DB:
-          GIT_USERNAME:
-          GIT_PASSWORD:
-          GIT_REGISTRY_TOKEN:
-          SOURCE_PATH:
           NEXUS_USERNAME: ((artifacts.username))
           NEXUS_PASSWORD: ((artifacts.password))
         run:

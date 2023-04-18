@@ -24,6 +24,16 @@
             "username": null,
             "password": null,
             "maxDirectMemory": "128M"
+        },
+        "stage-phi": {
+            "url": null,
+            "host": null,
+            "internalHost": null,
+            "instances": 1,
+            "memory": "4g",
+            "username": null,
+            "password": null,
+            "maxDirectMemory": "128M"
         }
     },
     "dbType": "",
@@ -35,13 +45,18 @@
     },
     "buildSecrets": {
     },
-    "deployConfig": {
-    },
-    "deploySecrets": {
-        "ACTIVE_PROFILE": "cre-test-helper.{env}-active-profile",
-        "AWS_ACCESS_KEY": "cre-test-helper.{env}-aws-access-key",
-        "AWS_SECRET_KEY": "cre-test-helper.{env}-aws-secret-key"
-    },
+    "deployments": [
+        {
+            "name": "cre-test-helper",
+            "config": {
+            },
+            "secrets": {
+                "ACTIVE_PROFILE": "cre-test-helper.{env}-active-profile",
+                "AWS_ACCESS_KEY": "cre-test-helper.{env}-aws-access-key",
+                "AWS_SECRET_KEY": "cre-test-helper.{env}-aws-secret-key"
+            }
+        }
+    ],
     "gradleBuild": true,
     "gradleIntegrationTests": true,
     "hasFlyway": false,
@@ -76,6 +91,7 @@
     "apmLogLevel": "info",
     "dailyBuild": true,
     "addPcfFlywayJobs": false,
+    "promoteHotfixEnabled": false,
     "cypress": false,
     "deprecated": {
         "addKafkaTopics": false,
