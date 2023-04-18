@@ -23,7 +23,7 @@
             "memory": "4g",
             "username": null,
             "password": null,
-            "maxDirectMemory": null
+            "maxDirectMemory": "128M"
         }
     },
     "dbType": "",
