@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
@@ -12,5 +13,10 @@ import lombok.NoArgsConstructor;
 public class PatientRepoMessage {
 
     private String searchRequestId;
+    private JobStatus searchRequestStatus;
+    private String searchRequestError;
+    private Integer totalRecordsSent;
+    private Long messageTimeMillis;
+    @ToString.Exclude
     private Patient patient;
 }
