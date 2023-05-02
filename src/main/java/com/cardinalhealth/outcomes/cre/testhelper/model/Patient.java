@@ -18,7 +18,9 @@ public class Patient {
     private Integer policyId;
     private String outcomesEligibilityDate;
     private String outcomesTermDate;
+    private String mtmEligibilityDate;
     private String mtmTermDate;
+    private String planEffectiveDate;
     private String planTermDate;
     private String firstName;
     private String lastName;
